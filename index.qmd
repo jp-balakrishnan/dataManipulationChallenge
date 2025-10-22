@@ -196,25 +196,132 @@ print(shipments_with_lateness[['shipID', 'plannedShipDate', 'actualShipDate', 'i
 
 **Question 1: Data Types and Date Handling**
 - What is the `dtype` of the `actualShipDate` series? How can you find out using code?
+
+actualShipDate is a datetime object
+
+Function to use: "dtype" to find the data type of the actualShipDate column
+
+shipments_with_lateness.dtype gives data type of all columns in the entire dataframe; 
+
+To get the data type of a specific column, use the column name as a key in the dataframe.
+
+shipments_with_lateness['actualShipDate'].dtype gives data type of actualShipDate column
+
+```{python}
+print("The dtype of the actualShipDate is {} and plannedShipDate is {}".format(shipments_with_lateness['actualShipDate'].dtype, shipments_with_lateness['plannedShipDate'].dtype))
+```
 - Why is it important that both `actualShipDate` and `plannedShipDate` have the same data type for comparison?
 
+Datatime is chronological, so it's important to compare them as datetime objects. If they are not the same data type, it will raise a TypeError.
+
+Also datetime object have methods specific to date manipulation, get various attributes of the date like day, month, year, etc.
+
+Both `actualShipDate` and `plannedShipDate` are datetime objects, so we can safely:
+- Compare them directly (`actualShipDate > plannedShipDate`)
+- Calculate time differences (`actualShipDate - plannedShipDate`)
+- Use datetime methods (`.dt.days`, `.dt.month`, etc.)
+
+```{python}
+print("Compare actualShipDate and plannedShipDate: ", shipments_with_lateness['actualShipDate'][0] > shipments_with_lateness['plannedShipDate'][0])
+print("Calculate time difference: ", shipments_with_lateness['actualShipDate'][0] - shipments_with_lateness['plannedShipDate'][0])
+print("Get day: ", shipments_with_lateness['actualShipDate'][0].day)
+print("Get month: ", shipments_with_lateness['actualShipDate'][0].month)
+print("Get year: ", shipments_with_lateness['actualShipDate'][0].year)
+```
+
 **Question 2: String vs Date Comparison**
-- Can you give an example where comparing two dates as strings would yield unintuitive results, e.g. what happens if you try to compare "04-11-2025" and "05-20-2024" as strings vs as dates?
+- Can you give an example where comparing two dates as strings would yield unintuitive results, e.g. what happens if you try to compare “04-11-2025” and “05-20-2024” as strings vs as dates?
+
+String is lexicographically compared, so "04-11-2025" > "05-20-2024" is False because "04" is less than "05".
+
+Datetime is chronologically compared, so "2025-04-11" > "2024-05-20" is True because "2025" is greater than "2024".
+
+1. When we compare String"04-11-2025" and DateTime "05-20-2024", TypeError is thrown because Python cannot directly compare datetime objects with strings
+```{python} #| echo: false
+
+date_obj = datetime(2024, 5, 20)
+date_str = "2024-05-20"
+# This will raise TypeError: can't compare datetime.datetime to str
+try:
+    print(date_obj > date_str)  # ERROR!
+except TypeError as e:
+    print(f"Error caught: {e}")
+    print("Cannot compare datetime object with string directly")
+
+```
+
+2. When we compare String "04-11-2025" and String "05-20-2024" of same format, python compares them lexicographically (alphabetically), not chronologically:
+
+```{python}
+# String comparison (lexicographic)
+print("Compare String '04-11-2025 > 05-20-2024': ", "04-11-2025" > "05-20-2024")  # False 
+
+# Date comparison (chronological)
+from datetime import datetime
+date1 = datetime(2025, 4, 11)
+date2 = datetime(2024, 5, 20)
+print("Compare Datetime '04-11-2025 > 05-20-2024': ", date1 > date2)  # True (correct!)
+```
+
+3. Format is another challenge. String comparisons depend on the format. 
+    *  "2024-05-20" > "20-05-2024" is False because "2024" is less than "20". 
+    *  "05/20/2024" > "2024-05-20" is True because "05/20/2024" is greater than "2024-05-20".
+    *  "2024-**05**-20" == "2024-**5**-20" is False because "05" is not equal to "5".
+    *  "2024-05-20" == "2024-05-20 " is False because Space in the end.
+
+Best Practice: Always convert strings to datetime objects before comparison:
+```{python}
+date_str1 = "2024-05-20"
+date_str2 = "2024-04-11"
+dt1 = datetime.strptime(date_str1, "%Y-%m-%d")
+dt2 = datetime.strptime(date_str2, "%Y-%m-%d")
+print("Data type of dt1: ", type(dt1))
+print("Data type of dt2: ", type(dt2))
+print("Compare Datetime '2024-05-20 > 2024-04-11': ", dt1 > dt2) 
+print("Are dt1 and dt2 same data type? ", type(dt1) == type(dt2))  
+```
 
 **Question 3: Debug This Code**
-```python
+```{python}
 # This code has an error - can you spot it?
+try:
+    shipments_with_lateness = (
+        shipments_df
+        .assign(
+            is_late=lambda df: df['actualShipDate'] > df['plannedShipDate'],
+            days_late=lambda df: (df['actualShipDate'] - df['plannedShipDate']).dt.days,
+            lateStatement="Darn Shipment is Late" if shipments_df['is_late'] else "Shipment is on Time"
+        )
+    )
+except KeyError as e:
+    print(f"Error caught: {e}")
+    print("Cannot access 'is_late' column before it's created in the assign method")
+    print("The 'is_late' column doesn't exist in shipments_df yet")
+except Exception as e:
+    print(f"Unexpected error: {e}")
+```
+What's wrong with the `lateStatement` assignment and how would you fix it?
+
+Problem is accessing `shipments_df['is_late']` before the `is_late` column is created. Until assign method is complete, `is_late` is not yet created.
+
+Fix the code by using a lambda function to reference internally created column `is_late` using reference the current dataframe `df`.
+
+```{python}
 shipments_with_lateness = (
     shipments_df
     .assign(
         is_late=lambda df: df['actualShipDate'] > df['plannedShipDate'],
         days_late=lambda df: (df['actualShipDate'] - df['plannedShipDate']).dt.days,
-        lateStatement="Darn Shipment is Late" if shipments_df['is_late'] else "Shipment is on Time"
+        lateStatement=lambda df: df['is_late'].map({True: "Darn Shipment is Late", False: "Shipment is on Time"})
     )
 )
+print("Late Statement: ", shipments_with_lateness['lateStatement'][0])
+print("Is late: ", shipments_with_lateness['is_late'][0])
+print("Days late: ", shipments_with_lateness['days_late'][0])
+print("Actual Ship Date: ", shipments_with_lateness['actualShipDate'][0])
+print("Planned Ship Date: ", shipments_with_lateness['plannedShipDate'][0])
 ```
-What's wrong with the `lateStatement` assignment and how would you fix it?
-:::
+
 
 #### Briefly Give Answers to the Discussion Questions In This Section
 

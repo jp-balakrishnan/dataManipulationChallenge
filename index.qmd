@@ -196,6 +196,38 @@ print(shipments_with_lateness[['shipID', 'plannedShipDate', 'actualShipDate', 'i
 
 **Question 1: Data Types and Date Handling**
 - What is the `dtype` of the `actualShipDate` series? How can you find out using code?
+- Why is it important that both `actualShipDate` and `plannedShipDate` have the same data type for comparison?
+
+**Question 2: String vs Date Comparison**
+- Can you give an example where comparing two dates as strings would yield unintuitive results, e.g. what happens if you try to compare “04-11-2025” and “05-20-2024” as strings vs as dates?
+
+**Question 3: Debug This Code**
+```{python}
+# This code has an error - can you spot it?
+try:
+    shipments_with_lateness = (
+        shipments_df
+        .assign(
+            is_late=lambda df: df['actualShipDate'] > df['plannedShipDate'],
+            days_late=lambda df: (df['actualShipDate'] - df['plannedShipDate']).dt.days,
+            lateStatement="Darn Shipment is Late" if shipments_df['is_late'] else "Shipment is on Time"
+        )
+    )
+except KeyError as e:
+    print(f"Error caught: {e}")
+    print("Cannot access 'is_late' column before it's created in the assign method")
+    print("The 'is_late' column doesn't exist in shipments_df yet")
+except Exception as e:
+    print(f"Unexpected error: {e}")
+```
+What's wrong with the `lateStatement` assignment and how would you fix it?
+:::
+
+
+#### Briefly Give Answers to the Discussion Questions In This Section
+
+**Question 1: Data Types and Date Handling**
+- What is the `dtype` of the `actualShipDate` series? How can you find out using code?
 
 actualShipDate is a datetime object
 
@@ -237,8 +269,8 @@ String is lexicographically compared, so "04-11-2025" > "05-20-2024" is False be
 Datetime is chronologically compared, so "2025-04-11" > "2024-05-20" is True because "2025" is greater than "2024".
 
 1. When we compare String"04-11-2025" and DateTime "05-20-2024", TypeError is thrown because Python cannot directly compare datetime objects with strings
-```{python} #| echo: false
-
+```{python}
+#| echo: true
 date_obj = datetime(2024, 5, 20)
 date_str = "2024-05-20"
 # This will raise TypeError: can't compare datetime.datetime to str
@@ -249,7 +281,6 @@ except TypeError as e:
     print("Cannot compare datetime object with string directly")
 
 ```
-
 2. When we compare String "04-11-2025" and String "05-20-2024" of same format, python compares them lexicographically (alphabetically), not chronologically:
 
 ```{python}
@@ -282,24 +313,7 @@ print("Are dt1 and dt2 same data type? ", type(dt1) == type(dt2))
 ```
 
 **Question 3: Debug This Code**
-```{python}
-# This code has an error - can you spot it?
-try:
-    shipments_with_lateness = (
-        shipments_df
-        .assign(
-            is_late=lambda df: df['actualShipDate'] > df['plannedShipDate'],
-            days_late=lambda df: (df['actualShipDate'] - df['plannedShipDate']).dt.days,
-            lateStatement="Darn Shipment is Late" if shipments_df['is_late'] else "Shipment is on Time"
-        )
-    )
-except KeyError as e:
-    print(f"Error caught: {e}")
-    print("Cannot access 'is_late' column before it's created in the assign method")
-    print("The 'is_late' column doesn't exist in shipments_df yet")
-except Exception as e:
-    print(f"Unexpected error: {e}")
-```
+
 What's wrong with the `lateStatement` assignment and how would you fix it?
 
 Problem is accessing `shipments_df['is_late']` before the `is_late` column is created. Until assign method is complete, `is_late` is not yet created.
@@ -321,11 +335,6 @@ print("Days late: ", shipments_with_lateness['days_late'][0])
 print("Actual Ship Date: ", shipments_with_lateness['actualShipDate'][0])
 print("Planned Ship Date: ", shipments_with_lateness['plannedShipDate'][0])
 ```
-
-
-#### Briefly Give Answers to the Discussion Questions In This Section
-
-> Replace this with your answers to the discussion questions
 
 ### 2. Subset: Querying Rows and Filtering Columns
 
@@ -370,7 +379,31 @@ print(late_shipments.head())
 
 #### Briefly Give Answers to the Discussion Questions In This Section
 
-> Replace this with your answers to the discussion questions
+**Question 1: Query vs Boolean Indexing**
+- What's the difference between using `.query('is_late == True')` and `[df['is_late'] == True]`?
+
+.query('is_late == True') is more readable because it is more explicit. It is easier to understand what is happening. Its chaining and easy to understand sequence of operations. Its easier to debug and maintain, also think in terms of record level operations.
+
+[df['is_late'] == True] is less readable because it is not as explicit. It is not clear what is happening. Sometimes its not easier as its at entire dataframe level operations.
+
+- Which approach is more readable and why?
+.query('is_late == True') is more readable, easy to understand sequence of operations, also think in terms of record level operations.
+
+**Question 2: Additional Row Querying**
+- Can you show an example of using a variable like `late_threshold` to query rows for shipments that are at least `late_threshold` days late, e.g. what if you wanted to query rows for shipments that are at least 5 days late?
+
+Define a variable `late_threshold` and then use it in query using string inplace replacement of the variable.
+
+```{python}
+
+late_threshold = 5
+print("Define late_thresold variable; Late threshold: ", late_threshold)
+print("Total Number of shipments: ", len(shipments_with_lateness))
+late_shipments = shipments_with_lateness.query(f'days_late >= {late_threshold}')
+print("Number of late shipments: ", len(late_shipments))
+print("Show first 5 rows of late shipments: ")
+print(late_shipments.head())
+```
 
 ### 3. Drop: Removing Unwanted Data
 

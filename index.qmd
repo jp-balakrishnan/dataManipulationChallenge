@@ -2,13 +2,7 @@
 title: "Data Manipulation Challenge"
 subtitle: "A Mental Model for Method Chaining in Pandas"
 format:
-  html:
-    toc: true
-    toc-depth: 3
-    code-fold: false
-    number-sections: true
-  pdf:
-    documentclass: article
+  html: default
 execute:
   echo: true
   eval: true
@@ -301,8 +295,8 @@ try:
 except TypeError as e:
     print(f"Error caught: {e}")
     print("Cannot compare datetime object with string directly")
-
 ```
+
 2. When we compare String "04-11-2025" and String "05-20-2024" of same format, python compares them lexicographically (alphabetically), not chronologically:
 
 ```{python}

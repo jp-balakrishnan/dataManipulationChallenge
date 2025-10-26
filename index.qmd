@@ -927,6 +927,18 @@ They can also see the percentage of shipments that have multiple product categor
 #| warning: false
 #| 
 print("Percentage of multi-category shipments: ", multi_category_shipments['shipID'].nunique() / comprehensive_analysis['shipID'].nunique() * 100)
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set(style="whitegrid")
+plt.figure(figsize=(10, 6))
+sns.barplot(x='prodCategory', y='is_late', data=comprehensive_analysis)
+plt.title('Late Shipments by Product Category')
+plt.xlabel('Product Category')
+plt.ylabel('Is Late')
+plt.show()
+
+
 ```
 
 ## Student Analysis Section: Mastering Data Manipulation {#student-analysis-section}

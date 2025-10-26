@@ -2,8 +2,13 @@
 title: "Data Manipulation Challenge"
 subtitle: "A Mental Model for Method Chaining in Pandas"
 format:
-  html: default
-  pdf: default
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    number-sections: true
+  pdf:
+    documentclass: article
 execute:
   echo: true
   eval: true
@@ -416,7 +421,8 @@ print(late_shipments.head())
 
 [df['is_late'] == True] is less readable because it is not as explicit. It is not clear what is happening. Sometimes its not easier as its at entire dataframe level operations.
 
-- Which approach is more readable and why?
+**Which approach is more readable and why?**
+
 .query('is_late == True') is more readable, easy to understand sequence of operations, also think in terms of record level operations.
 
 **Question 2: Additional Row Querying**
@@ -493,18 +499,20 @@ print("Columns in the dataframe after dropping quantity column: ", clean_shipmen
 print("Columns in the dataframe after filtering to keep only the columns in the list: ", clean_shipments.filter(['partID', 'plannedShipDate', 'actualShipDate', 'days_late']).columns.tolist())
 ```
 
-- When would you choose to drop columns vs filter to keep specific columns?
+**When would you choose to drop columns vs filter to keep specific columns?**
 
-1. Drop columns if you don't need them for the analysis.
-2. Filter to keep specific columns if you need them for the analysis.
+1. Drop columns if we don't need them for the analysis. Based on feature engineering perspective, if we don't need a column for the analysis, we can drop it to simplify the dataframe and make it easier to understand.
+2. Filter to keep specific columns if we need them for the analysis. We can use filter to create a new dataframe with only the columns we need for subset or deep dive analysis.
 
 **Question 2: Handling Missing Data**
 - What happens if you use `.dropna()` without specifying `subset`? How is this different from `.dropna(subset=['plannedShipDate', 'actualShipDate'])`?
 
-If you use `.dropna()` without specifying `subset`, it will drop all rows with any missing values in any column.
-If you use `.dropna(subset=['plannedShipDate', 'actualShipDate'])`, it will drop rows with missing values in only the `plannedShipDate` and `actualShipDate` columns. This is more selective and efficient.
-- Why might you want to be selective about which columns to check for missing values? 
-Data analysis is about focusing on the relevant columns and data. If you don't need to check for missing values in all columns, it's more efficient and easier to understand. Say each column is a feature and based on domain/context, you may not need to check for missing values in all columns. example if you are analyzing a dataset of customer orders, you may not need to check for missing values in the order created-by user column if you are only interested in the order amount.
+If we use `.dropna()` without specifying `subset`, it will drop all rows with any missing values in any column.
+If we use `.dropna(subset=['plannedShipDate', 'actualShipDate'])`, it will drop rows with missing values in only the `plannedShipDate` and `actualShipDate` columns. This is more selective and efficient.
+
+**Why might you want to be selective about which columns to check for missing values?**
+
+Data analysis is about focusing on the relevant columns and data. If we don't need to check for missing values in all columns, it's more efficient and easier to understand. Say each column is a feature and based on domain/context, we may not need to check for missing values in all columns. example if we are analyzing a dataset of customer orders, we may not need to check for missing values in the order created-by user column if we are only interested in the order amount.
 
 ```{python}
 #| label: Handling Missing Data

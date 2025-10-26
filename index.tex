@@ -5,9 +5,7 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
-  letterpaper,
-  DIV=11,
-  numbers=noendperiod]{scrartcl}
+]{article}
 \usepackage{xcolor}
 \usepackage{amsmath,amssymb}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
@@ -146,7 +144,6 @@
  
 
 
-\KOMAoption{captions}{tableheading}
 \makeatletter
 \@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
 \@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
@@ -235,8 +232,8 @@
 Chaining in
 Pandas}\label{data-manipulation-challenge---a-mental-model-for-method-chaining-in-pandas}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{📊 Challenge Requirements In Section
-\hyperref[student-analysis-section]{Student Analysis Section}}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{📊 Challenge Requirements In Section
+\hyperref[student-analysis-section]{Student Analysis Section}}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \begin{itemize}
 \tightlist
@@ -247,7 +244,7 @@ Pandas}\label{data-manipulation-challenge---a-mental-model-for-method-chaining-i
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🎯 Note on Python Usage}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🎯 Note on Python Usage}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Recommended Workflow: Use Your Existing Virtual Environment} If
 you completed the Tech Setup Challenge Part 2, you already have a
@@ -357,7 +354,7 @@ answer critical business questions about service levels and
 cross-category orders, using the seven mental models of data
 manipulation through pandas method chaining.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-warning-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{⚠️ AI Partnership Required}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-warning-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{⚠️ AI Partnership Required}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-warning-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 This challenge pushes boundaries intentionally. You'll tackle problems
 that normally require weeks of study, but with Cursor AI as your partner
@@ -501,7 +498,7 @@ First few rows of product line data:
 9  part003caee      linea3  Marketables
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{💡 Understanding the Data}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{💡 Understanding the Data}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Shipments Data:} Contains individual line items for each
 shipment, including: - \texttt{shipID}: Unique identifier for each
@@ -562,7 +559,7 @@ Added lateness calculations:
 4   10005      2013-10-14     2013-10-08    False         -6
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-tip-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{💡 Method Chaining Tip for New Python Users}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{💡 Method Chaining Tip for New Python Users}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Why use \texttt{lambda\ df:}?} When chaining methods, we need to
 reference the current state of the dataframe. The \texttt{lambda\ df:}
@@ -576,7 +573,7 @@ the code more readable.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Assign Mental Model}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Assign Mental Model}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Question 1: Data Types and Date Handling} - What is the
 \texttt{dtype} of the \texttt{actualShipDate} series? How can you find
@@ -887,7 +884,7 @@ Late shipments sample:
 780   10192  part008482f      2013-10-09     2013-10-14          5
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{🔍 Understanding the Methods}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{🔍 Understanding the Methods}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \begin{itemize}
 \tightlist
@@ -903,7 +900,7 @@ Late shipments sample:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Subset Mental Model}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Subset Mental Model}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Question 1: Query vs Boolean Indexing} - What's the difference
 between using
@@ -938,13 +935,10 @@ also think in terms of record level operations.
 explicit. It is not clear what is happening. Sometimes its not easier as
 its at entire dataframe level operations.
 
-\begin{itemize}
-\tightlist
-\item
-  Which approach is more readable and why? .query(`is\_late == True') is
-  more readable, easy to understand sequence of operations, also think
-  in terms of record level operations.
-\end{itemize}
+\textbf{Which approach is more readable and why?}
+
+.query(`is\_late == True') is more readable, easy to understand sequence
+of operations, also think in terms of record level operations.
 
 \textbf{Question 2: Additional Row Querying} - Can you show an example
 of using a variable like \texttt{late\_threshold} to query rows for
@@ -1017,7 +1011,7 @@ Cleaned dataset: 4000 rows, 7 columns
 Remaining columns: ['shipID', 'plannedShipDate', 'actualShipDate', 'partID', 'is_late', 'days_late', 'lateStatement']
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Drop Mental Model}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Drop Mental Model}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Question 1: Drop vs Filter Strategies} - What's the difference
 between
@@ -1063,20 +1057,21 @@ Columns in the dataframe after dropping quantity column:  ['plannedShipDate', 'a
 Columns in the dataframe after filtering to keep only the columns in the list:  ['partID', 'plannedShipDate', 'actualShipDate', 'days_late']
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  When would you choose to drop columns vs filter to keep specific
-  columns?
-\end{itemize}
+\textbf{When would you choose to drop columns vs filter to keep specific
+columns?}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Drop columns if you don't need them for the analysis.
+  Drop columns if we don't need them for the analysis. Based on feature
+  engineering perspective, if we don't need a column for the analysis,
+  we can drop it to simplify the dataframe and make it easier to
+  understand.
 \item
-  Filter to keep specific columns if you need them for the analysis.
+  Filter to keep specific columns if we need them for the analysis. We
+  can use filter to create a new dataframe with only the columns we need
+  for subset or deep dive analysis.
 \end{enumerate}
 
 \textbf{Question 2: Handling Missing Data} - What happens if you use
@@ -1084,20 +1079,23 @@ Columns in the dataframe after filtering to keep only the columns in the list:  
 different from
 \texttt{.dropna(subset={[}\textquotesingle{}plannedShipDate\textquotesingle{},\ \textquotesingle{}actualShipDate\textquotesingle{}{]})}?
 
-If you use \texttt{.dropna()} without specifying \texttt{subset}, it
-will drop all rows with any missing values in any column. If you use
+If we use \texttt{.dropna()} without specifying \texttt{subset}, it will
+drop all rows with any missing values in any column. If we use
 \texttt{.dropna(subset={[}\textquotesingle{}plannedShipDate\textquotesingle{},\ \textquotesingle{}actualShipDate\textquotesingle{}{]})},
 it will drop rows with missing values in only the
 \texttt{plannedShipDate} and \texttt{actualShipDate} columns. This is
-more selective and efficient. - Why might you want to be selective about
-which columns to check for missing values? Data analysis is about
-focusing on the relevant columns and data. If you don't need to check
-for missing values in all columns, it's more efficient and easier to
-understand. Say each column is a feature and based on domain/context,
-you may not need to check for missing values in all columns. example if
-you are analyzing a dataset of customer orders, you may not need to
-check for missing values in the order created-by user column if you are
-only interested in the order amount.
+more selective and efficient.
+
+\textbf{Why might you want to be selective about which columns to check
+for missing values?}
+
+Data analysis is about focusing on the relevant columns and data. If we
+don't need to check for missing values in all columns, it's more
+efficient and easier to understand. Say each column is a feature and
+based on domain/context, we may not need to check for missing values in
+all columns. example if we are analyzing a dataset of customer orders,
+we may not need to check for missing values in the order created-by user
+column if we are only interested in the order amount.
 
 \phantomsection\label{handling-missing-data}
 \begin{Shaded}
@@ -1150,7 +1148,7 @@ Shipments sorted by lateness (worst first):
 9   10217  part2081be9         21     True
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Sort Mental Model}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Sort Mental Model}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Question 1: Sorting Strategies} - What's the difference between
 \texttt{ascending=False} and \texttt{ascending=True} in sorting? - How
@@ -1308,7 +1306,7 @@ max         NaN     21.000
 On-time delivery rate: 88.6%
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Aggregate Mental Model}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Aggregate Mental Model}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Question 1: Boolean Aggregation} - Why does \texttt{sum()} work
 on boolean values? What does it count?
@@ -1390,7 +1388,7 @@ Liquids         537
 Name: count, dtype: int64
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Merge Mental Model}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Merge Mental Model}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Question 1: Join Types and Data Loss} - Why does your professor
 think we should use
@@ -1539,7 +1537,7 @@ Marketables     True  1850  145  0.078    -0.804  21
 SpareParts      True   767  137  0.179    -1.003  21
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Split-Apply-Combine Mental Model}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Split-Apply-Combine Mental Model}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Question 1: GroupBy Mechanics} - What does
 \texttt{.groupby(\textquotesingle{}prodCategory\textquotesingle{})}
@@ -1659,7 +1657,7 @@ Total unique shipments: 997
 Percentage with multiple categories: 23.3%
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Answering A Business Question}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{🤔 Discussion Questions: Answering A Business Question}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Question 1: Business Question Analysis} - What business question
 does this comprehensive analysis answer? - How does grouping by
@@ -1804,7 +1802,7 @@ Analysis}\label{core-challenge-discussion-questions-analysis}
 discussion questions - Code examples where appropriate to support your
 explanations
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{📊 Discussion Questions Requirements}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{📊 Discussion Questions Requirements}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Complete all discussion question sections:} 1. \textbf{Assign
 Mental Model:} Data types, date handling, and debugging 2.
@@ -1847,7 +1845,7 @@ that explains your findings
 \subsection{Getting Started: Repository Setup
 🚀}\label{getting-started-repository-setup}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{📁 Getting Started}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{📁 Getting Started}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Step 1:} Fork and clone this challenge repository - Go to the
 course repository and find the ``dataManipulationChallenge'' folder -
@@ -1869,7 +1867,7 @@ you're reading right now - you'll edit it to complete your analysis.
 
 \subsubsection{Getting Started Tips}\label{getting-started-tips}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{🎯 Method Chaining Philosophy}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{🎯 Method Chaining Philosophy}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \begin{quote}
 ``Each operation should build naturally on the previous one''
@@ -1881,7 +1879,7 @@ than the individual pieces.}
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomtitle=1mm, coltitle=black, opacitybacktitle=0.6, bottomrule=.15mm, leftrule=.75mm, toptitle=1mm, left=2mm, toprule=.15mm, colframe=quarto-callout-warning-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{💾 Important: Save Your Work Frequently!}, breakable, colback=white, opacityback=0, rightrule=.15mm, colbacktitle=quarto-callout-warning-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{💾 Important: Save Your Work Frequently!}, toptitle=1mm, toprule=.15mm, breakable, colback=white, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, leftrule=.75mm, opacitybacktitle=0.6, left=2mm, coltitle=black, bottomrule=.15mm, arc=.35mm, colframe=quarto-callout-warning-color-frame, bottomtitle=1mm, titlerule=0mm, rightrule=.15mm]
 
 \textbf{Before you start:} Make sure to commit your work often using the
 Source Control panel in Cursor (Ctrl+Shift+G or Cmd+Shift+G). This

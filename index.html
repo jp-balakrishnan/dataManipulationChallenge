@@ -68,6 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <div id="quarto-toc-target"></div>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -90,9 +91,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-
-<section id="data-manipulation-challenge---a-mental-model-for-method-chaining-in-pandas" class="level1">
-<h1>🔗 Data Manipulation Challenge - A Mental Model for Method Chaining in Pandas</h1>
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-manipulation-challenge---a-mental-model-for-method-chaining-in-pandas" id="toc-data-manipulation-challenge---a-mental-model-for-method-chaining-in-pandas"><span class="header-section-number">1</span> 🔗 Data Manipulation Challenge - A Mental Model for Method Chaining in Pandas</a>
+  <ul>
+  <li><a href="#the-problem-mastering-data-manipulation-through-method-chaining" id="toc-the-problem-mastering-data-manipulation-through-method-chaining"><span class="header-section-number">1.1</span> The Problem: Mastering Data Manipulation Through Method Chaining</a></li>
+  <li><a href="#the-seven-mental-models-of-data-manipulation" id="toc-the-seven-mental-models-of-data-manipulation"><span class="header-section-number">1.2</span> The Seven Mental Models of Data Manipulation</a></li>
+  <li><a href="#data-and-business-context" id="toc-data-and-business-context"><span class="header-section-number">1.3</span> Data and Business Context</a></li>
+  <li><a href="#data-loading-and-initial-exploration" id="toc-data-loading-and-initial-exploration"><span class="header-section-number">1.4</span> Data Loading and Initial Exploration</a></li>
+  <li><a href="#the-seven-mental-models-a-progressive-learning-journey" id="toc-the-seven-mental-models-a-progressive-learning-journey"><span class="header-section-number">1.5</span> The Seven Mental Models: A Progressive Learning Journey</a>
+  <ul>
+  <li><a href="#assign-adding-new-variables" id="toc-assign-adding-new-variables"><span class="header-section-number">1.5.1</span> 1. Assign: Adding New Variables</a></li>
+  <li><a href="#subset-querying-rows-and-filtering-columns" id="toc-subset-querying-rows-and-filtering-columns"><span class="header-section-number">1.5.2</span> 2. Subset: Querying Rows and Filtering Columns</a></li>
+  <li><a href="#drop-removing-unwanted-data" id="toc-drop-removing-unwanted-data"><span class="header-section-number">1.5.3</span> 3. Drop: Removing Unwanted Data</a></li>
+  <li><a href="#sort-arranging-data" id="toc-sort-arranging-data"><span class="header-section-number">1.5.4</span> 4. Sort: Arranging Data</a></li>
+  <li><a href="#aggregate-summarizing-data" id="toc-aggregate-summarizing-data"><span class="header-section-number">1.5.5</span> 5. Aggregate: Summarizing Data</a></li>
+  <li><a href="#merge-combining-information" id="toc-merge-combining-information"><span class="header-section-number">1.5.6</span> 6. Merge: Combining Information</a></li>
+  <li><a href="#split-apply-combine-group-analysis" id="toc-split-apply-combine-group-analysis"><span class="header-section-number">1.5.7</span> 7. Split-Apply-Combine: Group Analysis</a></li>
+  </ul></li>
+  <li><a href="#answering-a-business-question" id="toc-answering-a-business-question"><span class="header-section-number">1.6</span> Answering A Business Question</a></li>
+  <li><a href="#student-analysis-section" id="toc-student-analysis-section"><span class="header-section-number">1.7</span> Student Analysis Section: Mastering Data Manipulation</a>
+  <ul>
+  <li><a href="#core-challenge-discussion-questions-analysis" id="toc-core-challenge-discussion-questions-analysis"><span class="header-section-number">1.7.1</span> Core Challenge: Discussion Questions Analysis</a></li>
+  <li><a href="#professional-visualizations-for-100-grade" id="toc-professional-visualizations-for-100-grade"><span class="header-section-number">1.7.2</span> Professional Visualizations (For 100% Grade)</a></li>
+  </ul></li>
+  <li><a href="#challenge-requirements" id="toc-challenge-requirements"><span class="header-section-number">1.8</span> Challenge Requirements 📋</a></li>
+  <li><a href="#getting-started-repository-setup" id="toc-getting-started-repository-setup"><span class="header-section-number">1.9</span> Getting Started: Repository Setup 🚀</a>
+  <ul>
+  <li><a href="#getting-started-tips" id="toc-getting-started-tips"><span class="header-section-number">1.9.1</span> Getting Started Tips</a></li>
+  </ul></li>
+  <li><a href="#grading-rubric" id="toc-grading-rubric"><span class="header-section-number">1.10</span> Grading Rubric 🎓</a></li>
+  <li><a href="#submission-checklist" id="toc-submission-checklist"><span class="header-section-number">1.11</span> Submission Checklist ✅</a></li>
+  </ul></li>
+  </ul>
+</nav>
+<section id="data-manipulation-challenge---a-mental-model-for-method-chaining-in-pandas" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 🔗 Data Manipulation Challenge - A Mental Model for Method Chaining in Pandas</h1>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -160,8 +196,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Why This Works:</strong> Virtual environments are portable - you can use the same environment across multiple projects, and Cursor automatically activates it when you select the interpreter!</p>
 </div>
 </div>
-<section id="the-problem-mastering-data-manipulation-through-method-chaining" class="level2">
-<h2>The Problem: Mastering Data Manipulation Through Method Chaining</h2>
+<section id="the-problem-mastering-data-manipulation-through-method-chaining" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> The Problem: Mastering Data Manipulation Through Method Chaining</h2>
 <p><strong>Core Question:</strong> How can we efficiently manipulate datasets using <code>pandas</code> method chaining to answer complex business questions?</p>
 <p><strong>The Challenge:</strong> Real-world data analysis requires combining multiple data manipulation techniques in sequence. Rather than creating intermediate variables at each step, method chaining allows us to write clean, readable code that flows logically from one operation to the next.</p>
 <p><strong>Our Approach:</strong> We’ll work with ZappTech’s shipment data to answer critical business questions about service levels and cross-category orders, using the seven mental models of data manipulation through pandas method chaining.</p>
@@ -180,8 +216,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="the-seven-mental-models-of-data-manipulation" class="level2">
-<h2>The Seven Mental Models of Data Manipulation</h2>
+<section id="the-seven-mental-models-of-data-manipulation" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> The Seven Mental Models of Data Manipulation</h2>
 <p>The seven most important ways we manipulate datasets are:</p>
 <ol type="1">
 <li><strong>Assign:</strong> Add new variables with calculations and transformations</li>
@@ -193,8 +229,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Split-Apply-Combine:</strong> Group data and apply functions within groups</li>
 </ol>
 </section>
-<section id="data-and-business-context" class="level2">
-<h2>Data and Business Context</h2>
+<section id="data-and-business-context" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Data and Business Context</h2>
 <p>We analyze ZappTech’s shipment data, which contains information about product deliveries across multiple categories. This dataset is ideal for our analysis because:</p>
 <ul>
 <li><strong>Real Business Questions:</strong> CEO wants to understand service levels and cross-category shopping patterns</li>
@@ -203,8 +239,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Method Chaining Practice:</strong> Perfect for demonstrating all seven mental models in sequence</li>
 </ul>
 </section>
-<section id="data-loading-and-initial-exploration" class="level2">
-<h2>Data Loading and Initial Exploration</h2>
+<section id="data-loading-and-initial-exploration" class="level2" data-number="1.4">
+<h2 data-number="1.4"><span class="header-section-number">1.4</span> Data Loading and Initial Exploration</h2>
 <p>Let’s start by loading the ZappTech shipment data and understanding what we’re working with.</p>
 <div id="load-data" class="cell" data-message="false" data-execution_count="1">
 <div class="sourceCode" id="cb1"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -290,11 +326,11 @@ First few rows of product line data:
 </div>
 </div>
 </section>
-<section id="the-seven-mental-models-a-progressive-learning-journey" class="level2">
-<h2>The Seven Mental Models: A Progressive Learning Journey</h2>
+<section id="the-seven-mental-models-a-progressive-learning-journey" class="level2" data-number="1.5">
+<h2 data-number="1.5"><span class="header-section-number">1.5</span> The Seven Mental Models: A Progressive Learning Journey</h2>
 <p>Now we’ll work through each of the seven mental models using method chaining, starting simple and building complexity.</p>
-<section id="assign-adding-new-variables" class="level3">
-<h3>1. Assign: Adding New Variables</h3>
+<section id="assign-adding-new-variables" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1"><span class="header-section-number">1.5.1</span> 1. Assign: Adding New Variables</h3>
 <p><strong>Mental Model:</strong> Create new columns with calculations and transformations.</p>
 <p>Let’s start by calculating whether each shipment was late:</p>
 <div id="mental-model-1-assign" class="cell" data-execution_count="2">
@@ -372,8 +408,8 @@ The &#39;is_late&#39; column doesn&#39;t exist in shipments_df yet</code></pre>
 <p>What’s wrong with the <code>lateStatement</code> assignment and how would you fix it?</p>
 </div>
 </div>
-<section id="briefly-give-answers-to-the-discussion-questions-in-this-section" class="level4">
-<h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
+<section id="briefly-give-answers-to-the-discussion-questions-in-this-section" class="level4" data-number="1.5.1.1">
+<h4 data-number="1.5.1.1"><span class="header-section-number">1.5.1.1</span> Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Data Types and Date Handling</strong> - What is the <code>dtype</code> of the <code>actualShipDate</code> series? How can you find out using code?</p>
 <p>actualShipDate is a datetime object</p>
 <p>Function to use: “dtype” to find the data type of the actualShipDate column</p>
@@ -473,7 +509,7 @@ Are dt1 and dt2 same data type?  True</code></pre>
 <p>What’s wrong with the <code>lateStatement</code> assignment and how would you fix it?</p>
 <p>Problem is accessing <code>shipments_df['is_late']</code> before the <code>is_late</code> column is created. Until assign method is complete, <code>is_late</code> is not yet created.</p>
 <p>Fix the code by using a lambda function to reference internally created column <code>is_late</code> using reference the current dataframe <code>df</code>.</p>
-<div id="ef91a0c9" class="cell" data-message="false" data-execution_count="9">
+<div id="783f3e91" class="cell" data-message="false" data-execution_count="9">
 <div class="sourceCode" id="cb19"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>shipments_with_lateness <span class="op">=</span> (</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    shipments_df</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
@@ -497,8 +533,8 @@ Planned Ship Date:  2013-11-06 00:00:00</code></pre>
 </div>
 </section>
 </section>
-<section id="subset-querying-rows-and-filtering-columns" class="level3">
-<h3>2. Subset: Querying Rows and Filtering Columns</h3>
+<section id="subset-querying-rows-and-filtering-columns" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2"><span class="header-section-number">1.5.2</span> 2. Subset: Querying Rows and Filtering Columns</h3>
 <p><strong>Mental Model:</strong> Query rows based on conditions and filter to keep specific columns.</p>
 <p>Let’s query for only late shipments and filter to keep the columns we need:</p>
 <div id="mental-model-2-subset" class="cell" data-execution_count="10">
@@ -555,14 +591,13 @@ Late shipments sample:
 <p><strong>Question 2: Additional Row Querying</strong> - Can you show an example of using a variable like <code>late_threshold</code> to query rows for shipments that are at least <code>late_threshold</code> days late, e.g. what if you wanted to query rows for shipments that are at least 5 days late?</p>
 </div>
 </div>
-<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-1" class="level4">
-<h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
+<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-1" class="level4" data-number="1.5.2.1">
+<h4 data-number="1.5.2.1"><span class="header-section-number">1.5.2.1</span> Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Query vs Boolean Indexing</strong> - What’s the difference between using <code>.query('is_late == True')</code> and <code>[df['is_late'] == True]</code>?</p>
 <p>.query(‘is_late == True’) is more readable because it is more explicit. It is easier to understand what is happening. Its chaining and easy to understand sequence of operations. Its easier to debug and maintain, also think in terms of record level operations.</p>
 <p>[df[‘is_late’] == True] is less readable because it is not as explicit. It is not clear what is happening. Sometimes its not easier as its at entire dataframe level operations.</p>
-<ul>
-<li>Which approach is more readable and why? .query(‘is_late == True’) is more readable, easy to understand sequence of operations, also think in terms of record level operations.</li>
-</ul>
+<p><strong>Which approach is more readable and why?</strong></p>
+<p>.query(‘is_late == True’) is more readable, easy to understand sequence of operations, also think in terms of record level operations.</p>
 <p><strong>Question 2: Additional Row Querying</strong> - Can you show an example of using a variable like <code>late_threshold</code> to query rows for shipments that are at least <code>late_threshold</code> days late, e.g. what if you wanted to query rows for shipments that are at least 5 days late?</p>
 <p>Define a variable <code>late_threshold</code> and then use it in query using string inplace replacement of the variable.</p>
 <div id="additional-row-querying" class="cell" data-message="false" data-execution_count="11">
@@ -595,8 +630,8 @@ Show first 5 rows of late shipments:
 </div>
 </section>
 </section>
-<section id="drop-removing-unwanted-data" class="level3">
-<h3>3. Drop: Removing Unwanted Data</h3>
+<section id="drop-removing-unwanted-data" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3"><span class="header-section-number">1.5.3</span> 3. Drop: Removing Unwanted Data</h3>
 <p><strong>Mental Model:</strong> Remove columns or rows you don’t need.</p>
 <p>Let’s clean up our data by removing unnecessary columns:</p>
 <div id="mental-model-3-drop" class="cell" data-execution_count="12">
@@ -630,8 +665,8 @@ Remaining columns: [&#39;shipID&#39;, &#39;plannedShipDate&#39;, &#39;actualShip
 <p><strong>Question 2: Handling Missing Data</strong> - What happens if you use <code>.dropna()</code> without specifying <code>subset</code>? How is this different from <code>.dropna(subset=['plannedShipDate', 'actualShipDate'])</code>? - Why might you want to be selective about which columns to check for missing values?</p>
 </div>
 </div>
-<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-2" class="level4">
-<h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
+<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-2" class="level4" data-number="1.5.3.1">
+<h4 data-number="1.5.3.1"><span class="header-section-number">1.5.3.1</span> Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Drop vs Filter Strategies</strong> - What’s the difference between <code>.drop(columns=['quantity'])</code> and <code>.filter()</code> with a list of columns you want to keep?</p>
 <p>.drop(columns=[‘quantity’]) is dropping the quantity column from the dataframe. .filter() is filtering the dataframe to keep only the columns in the list. This is more explicit and easier to understand. It’s easier to debug and maintain. We can also use .drop(columns=[‘quantity’]) to drop multiple columns at once.</p>
 <div id="drop-vs-filter-strategies" class="cell" data-message="false" data-execution_count="13">
@@ -644,15 +679,15 @@ Columns in the dataframe after dropping quantity column:  [&#39;plannedShipDate&
 Columns in the dataframe after filtering to keep only the columns in the list:  [&#39;partID&#39;, &#39;plannedShipDate&#39;, &#39;actualShipDate&#39;, &#39;days_late&#39;]</code></pre>
 </div>
 </div>
-<ul>
-<li>When would you choose to drop columns vs filter to keep specific columns?</li>
-</ul>
+<p><strong>When would you choose to drop columns vs filter to keep specific columns?</strong></p>
 <ol type="1">
-<li>Drop columns if you don’t need them for the analysis.</li>
-<li>Filter to keep specific columns if you need them for the analysis.</li>
+<li>Drop columns if we don’t need them for the analysis. Based on feature engineering perspective, if we don’t need a column for the analysis, we can drop it to simplify the dataframe and make it easier to understand.</li>
+<li>Filter to keep specific columns if we need them for the analysis. We can use filter to create a new dataframe with only the columns we need for subset or deep dive analysis.</li>
 </ol>
 <p><strong>Question 2: Handling Missing Data</strong> - What happens if you use <code>.dropna()</code> without specifying <code>subset</code>? How is this different from <code>.dropna(subset=['plannedShipDate', 'actualShipDate'])</code>?</p>
-<p>If you use <code>.dropna()</code> without specifying <code>subset</code>, it will drop all rows with any missing values in any column. If you use <code>.dropna(subset=['plannedShipDate', 'actualShipDate'])</code>, it will drop rows with missing values in only the <code>plannedShipDate</code> and <code>actualShipDate</code> columns. This is more selective and efficient. - Why might you want to be selective about which columns to check for missing values? Data analysis is about focusing on the relevant columns and data. If you don’t need to check for missing values in all columns, it’s more efficient and easier to understand. Say each column is a feature and based on domain/context, you may not need to check for missing values in all columns. example if you are analyzing a dataset of customer orders, you may not need to check for missing values in the order created-by user column if you are only interested in the order amount.</p>
+<p>If we use <code>.dropna()</code> without specifying <code>subset</code>, it will drop all rows with any missing values in any column. If we use <code>.dropna(subset=['plannedShipDate', 'actualShipDate'])</code>, it will drop rows with missing values in only the <code>plannedShipDate</code> and <code>actualShipDate</code> columns. This is more selective and efficient.</p>
+<p><strong>Why might you want to be selective about which columns to check for missing values?</strong></p>
+<p>Data analysis is about focusing on the relevant columns and data. If we don’t need to check for missing values in all columns, it’s more efficient and easier to understand. Say each column is a feature and based on domain/context, we may not need to check for missing values in all columns. example if we are analyzing a dataset of customer orders, we may not need to check for missing values in the order created-by user column if we are only interested in the order amount.</p>
 <div id="handling-missing-data" class="cell" data-message="false" data-execution_count="14">
 <div class="sourceCode" id="cb29"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe: &quot;</span>, clean_shipments.columns.tolist())</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe after dropping missing values: &quot;</span>, clean_shipments.dropna().columns.tolist())</span>
@@ -665,8 +700,8 @@ Columns in the dataframe after dropping missing values in subset:  [&#39;shipID&
 </div>
 </section>
 </section>
-<section id="sort-arranging-data" class="level3">
-<h3>4. Sort: Arranging Data</h3>
+<section id="sort-arranging-data" class="level3" data-number="1.5.4">
+<h3 data-number="1.5.4"><span class="header-section-number">1.5.4</span> 4. Sort: Arranging Data</h3>
 <p><strong>Mental Model:</strong> Order data by values or indices.</p>
 <p>Let’s sort by lateness to see the worst offenders:</p>
 <div id="mental-model-4-sort" class="cell" data-execution_count="15">
@@ -708,8 +743,8 @@ Columns in the dataframe after dropping missing values in subset:  [&#39;shipID&
 <p><strong>Question 2: Index Management</strong> - Why do we use <code>.reset_index(drop=True)</code> after sorting? - What happens to the original index when you sort? Why might this be problematic?</p>
 </div>
 </div>
-<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-3" class="level4">
-<h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
+<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-3" class="level4" data-number="1.5.4.1">
+<h4 data-number="1.5.4.1"><span class="header-section-number">1.5.4.1</span> Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Sorting Strategies</strong> - What’s the difference between <code>ascending=False</code> and <code>ascending=True</code> in sorting?</p>
 <p><code>ascending=False</code> sorts in descending order. <code>ascending=True</code> sorts in ascending order.</p>
 <div id="sorting-strategies-1" class="cell" data-message="false" data-execution_count="16">
@@ -769,7 +804,7 @@ Shipments sorted by lateness (best first):
 <p><strong>Question 2: Index Management</strong> - Why do we use <code>.reset_index(drop=True)</code> after sorting? - What happens to the original index when you sort? Why might this be problematic?</p>
 <p><code>.reset_index(drop=True)</code> after sorting is to reset the index to be sequential. This is to ensure that the index is not mixed up with the data.</p>
 <p>The original index is the index of the dataframe before sorting. It is the index of the dataframe after sorting.</p>
-<div id="81ce60f7" class="cell" data-message="false" data-execution_count="18">
+<div id="06c42e66" class="cell" data-message="false" data-execution_count="18">
 <div class="sourceCode" id="cb37"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Original index: &quot;</span>, sorted_by_lateness.index)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Index after sorting: &quot;</span>, sorted_by_lateness.reset_index(drop<span class="op">=</span><span class="va">True</span>).index)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -779,8 +814,8 @@ Index after sorting:  RangeIndex(start=0, stop=4000, step=1)</code></pre>
 </div>
 </section>
 </section>
-<section id="aggregate-summarizing-data" class="level3">
-<h3>5. Aggregate: Summarizing Data</h3>
+<section id="aggregate-summarizing-data" class="level3" data-number="1.5.5">
+<h3 data-number="1.5.5"><span class="header-section-number">1.5.5</span> 5. Aggregate: Summarizing Data</h3>
 <p><strong>Mental Model:</strong> Calculate summary statistics across groups or the entire dataset.</p>
 <p>Let’s calculate overall service level metrics:</p>
 <div id="mental-model-5-aggregate" class="cell" data-execution_count="19">
@@ -824,8 +859,8 @@ On-time delivery rate: 88.6%</code></pre>
 <p><strong>Question 1: Boolean Aggregation</strong> - Why does <code>sum()</code> work on boolean values? What does it count?</p>
 </div>
 </div>
-<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-4" class="level4">
-<h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
+<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-4" class="level4" data-number="1.5.5.1">
+<h4 data-number="1.5.5.1"><span class="header-section-number">1.5.5.1</span> Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Boolean Aggregation</strong> - Why does <code>sum()</code> work on boolean values? What does it count?</p>
 <p>Boolean values are either True or False. Here, true is 1 and false is 0. Sum is a function that adds up the values of a column, here it is adding up the number of True and False values. Basically it adds up all true = 1 and false = 0. So, out of 4000 records, 456 records are late (is_late is TRUE).</p>
 <div id="boolean-aggregation-1" class="cell" data-message="false" data-execution_count="20">
@@ -843,8 +878,8 @@ On-time delivery rate: 88.6%</code></pre>
 </div>
 </section>
 </section>
-<section id="merge-combining-information" class="level3">
-<h3>6. Merge: Combining Information</h3>
+<section id="merge-combining-information" class="level3" data-number="1.5.6">
+<h3 data-number="1.5.6"><span class="header-section-number">1.5.6</span> 6. Merge: Combining Information</h3>
 <p><strong>Mental Model:</strong> Join data from multiple sources to create richer datasets.</p>
 <p>Now let’s analyze service levels by product category. First, we need to merge our data:</p>
 <div id="mental-model-6-merge-prep" class="cell" data-execution_count="22">
@@ -884,8 +919,8 @@ Name: count, dtype: int64</code></pre>
 <p><strong>Question 2: Key Column Matching</strong> - What happens if there are duplicate <code>partID</code> values in the <code>product_line_df</code>?</p>
 </div>
 </div>
-<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-5" class="level4">
-<h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
+<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-5" class="level4" data-number="1.5.6.1">
+<h4 data-number="1.5.6.1"><span class="header-section-number">1.5.6.1</span> Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Join Types and Data Loss</strong> - Why does your professor think we should use <code>how='left'</code> in most cases? - How can you check if any shipments were lost during the merge?</p>
 <p>Left join keeps all records from left dataframe and and only joins the records from the right dataframe that have matching values in the key column. This is to avoid losing data. Inner join keeps only the records that have matching values in both dataframes. There is data loss if there are no matching values in the right dataframe. So, left join is more flexible and avoids data loss.</p>
 <p>We can check if any shipments were lost during the merge by checking if the number of records in the left dataframe is the same as the number of records in the right dataframe after the merge.</p>
@@ -953,8 +988,8 @@ Total number of records after merge:  4002</code></pre>
 <p>Duplicate partID values in the <code>product_line_df</code> are not causing an error during the merge but it creates duplicate rows in the merged dataframe as cartesian product, i.e. for each duplicate partID value in the <code>product_line_df</code>, all the rows in the <code>clean_shipments</code> dataframe are joined with the duplicate partID value in the <code>product_line_df</code>. 1 * 2 duplicates = 2 rows in the merged dataframe.</p>
 </section>
 </section>
-<section id="split-apply-combine-group-analysis" class="level3">
-<h3>7. Split-Apply-Combine: Group Analysis</h3>
+<section id="split-apply-combine-group-analysis" class="level3" data-number="1.5.7">
+<h3 data-number="1.5.7"><span class="header-section-number">1.5.7</span> 7. Split-Apply-Combine: Group Analysis</h3>
 <p><strong>Mental Model:</strong> Group data and apply functions within each group.</p>
 <p>Now let’s analyze service levels by category:</p>
 <div id="mental-model-7-groupby" class="cell" data-execution_count="25">
@@ -996,8 +1031,8 @@ SpareParts      True   767  137  0.179    -1.003  21</code></pre>
 <p><strong>Question 2: Multi-Level Grouping</strong> - Explore grouping by <code>['shipID', 'prodCategory']</code>? What question does this answer versus grouping by <code>'prodCategory'</code> alone? (HINT: There may be many rows with identical shipID’s due to a particular order having multiple partID’s.)</p>
 </div>
 </div>
-<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-6" class="level4">
-<h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
+<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-6" class="level4" data-number="1.5.7.1">
+<h4 data-number="1.5.7.1"><span class="header-section-number">1.5.7.1</span> Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: GroupBy Mechanics</strong> - What does <code>.groupby('prodCategory')</code> actually do? How does it “split” the data? - Why do we need to use <code>.agg()</code> after grouping? What happens if you don’t?</p>
 <p><code>.groupby('prodCategory')</code> splits the data into groups based on the <code>prodCategory</code> column. <code>.agg()</code> is used to apply aggregation functions to the grouped data.</p>
 <p>If you don’t use <code>.agg()</code>, you will get the raw data without any aggregation.</p>
@@ -1031,8 +1066,8 @@ Liquids          True         19</code></pre>
 </section>
 </section>
 </section>
-<section id="answering-a-business-question" class="level2">
-<h2>Answering A Business Question</h2>
+<section id="answering-a-business-question" class="level2" data-number="1.6">
+<h2 data-number="1.6"><span class="header-section-number">1.6</span> Answering A Business Question</h2>
 <p><strong>Mental Model:</strong> Combine multiple data manipulation techniques to answer complex business questions.</p>
 <p>Let’s create a comprehensive analysis by combining shipment-level data with category information:</p>
 <div id="mental-model-7-comprehensive" class="cell" data-execution_count="27">
@@ -1075,8 +1110,8 @@ Percentage with multiple categories: 23.3%</code></pre>
 <p><strong>Question 1: Business Question Analysis</strong> - What business question does this comprehensive analysis answer? - How does grouping by <code>['shipID', 'prodCategory']</code> differ from grouping by just <code>'prodCategory'</code>? - What insights can ZappTech’s management gain from knowing the percentage of multi-category shipments?</p>
 </div>
 </div>
-<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-7" class="level4">
-<h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
+<section id="briefly-give-answers-to-the-discussion-questions-in-this-section-7" class="level4" data-number="1.6.0.1">
+<h4 data-number="1.6.0.1"><span class="header-section-number">1.6.0.1</span> Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Business Question Analysis</strong> - What business question does this comprehensive analysis answer? - How does grouping by <code>['shipID', 'prodCategory']</code> differ from grouping by just <code>'prodCategory'</code>? - What insights can ZappTech’s management gain from knowing the percentage of multi-category shipments?</p>
 <p>This comprehensive analysis answers the business question of how many shipments are late for each product category for each shipment as each shipment can have multiple product categories. Here we can see shipments with multiple product categories and its average days late. Business can see which product categories are causing the most late shipments and which shipments are causing the most late shipments. Also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.</p>
 <p>Reasons like: 1) What products are causing the most late shipments? 2) Is this product category from a particular supplier? 3) Is late shipments from a particular supplier? 4) Is late shipments due to specific zip code? or location? 5) Is late shipments due to specific warehouse location?</p>
@@ -1126,11 +1161,11 @@ Percentage of multi-category shipments:  23.269809428284855</code></pre>
 </div>
 </section>
 </section>
-<section id="student-analysis-section" class="level2">
-<h2>Student Analysis Section: Mastering Data Manipulation</h2>
+<section id="student-analysis-section" class="level2" data-number="1.7">
+<h2 data-number="1.7"><span class="header-section-number">1.7</span> Student Analysis Section: Mastering Data Manipulation</h2>
 <p><strong>Your Task:</strong> Demonstrate your mastery of the seven mental models through comprehensive discussion and analysis. The bulk of your grade comes from thoughtfully answering the discussion questions for each mental model. See below for more details.</p>
-<section id="core-challenge-discussion-questions-analysis" class="level3">
-<h3>Core Challenge: Discussion Questions Analysis</h3>
+<section id="core-challenge-discussion-questions-analysis" class="level3" data-number="1.7.1">
+<h3 data-number="1.7.1"><span class="header-section-number">1.7.1</span> Core Challenge: Discussion Questions Analysis</h3>
 <p><strong>For each mental model, provide:</strong> - Clear, concise answers to all discussion questions - Code examples where appropriate to support your explanations</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1146,20 +1181,20 @@ Percentage of multi-category shipments:  23.269809428284855</code></pre>
 </div>
 </div>
 </section>
-<section id="professional-visualizations-for-100-grade" class="level3">
-<h3>Professional Visualizations (For 100% Grade)</h3>
+<section id="professional-visualizations-for-100-grade" class="level3" data-number="1.7.2">
+<h3 data-number="1.7.2"><span class="header-section-number">1.7.2</span> Professional Visualizations (For 100% Grade)</h3>
 <p><strong>Your Task:</strong> Create a professional visualization that supports your analysis and demonstrates your understanding of the data.</p>
 <p><strong>Create visualizations showing:</strong> - Service level (on-time percentage) by product category</p>
 <p><strong>Your visualizations should:</strong> - Use clear labels and professional formatting - Support the insights from your discussion questions - Be appropriate for a business audience - Do not <code>echo</code> the code that creates the visualizations</p>
 </section>
 </section>
-<section id="challenge-requirements" class="level2">
-<h2>Challenge Requirements 📋</h2>
+<section id="challenge-requirements" class="level2" data-number="1.8">
+<h2 data-number="1.8"><span class="header-section-number">1.8</span> Challenge Requirements 📋</h2>
 <p><strong>Your Primary Task:</strong> Answer all discussion questions for the seven mental models with thoughtful, well-reasoned responses that demonstrate your understanding of data manipulation concepts.</p>
 <p><strong>Key Requirements:</strong> - Complete discussion questions for each mental model - Demonstrate clear understanding of pandas concepts and data manipulation techniques - Write clear, business-focused analysis that explains your findings</p>
 </section>
-<section id="getting-started-repository-setup" class="level2">
-<h2>Getting Started: Repository Setup 🚀</h2>
+<section id="getting-started-repository-setup" class="level2" data-number="1.9">
+<h2 data-number="1.9"><span class="header-section-number">1.9</span> Getting Started: Repository Setup 🚀</h2>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1176,8 +1211,8 @@ Percentage of multi-category shipments:  23.269809428284855</code></pre>
 <p><strong>Note:</strong> This challenge uses the same <code>index.qmd</code> file you’re reading right now - you’ll edit it to complete your analysis.</p>
 </div>
 </div>
-<section id="getting-started-tips" class="level3">
-<h3>Getting Started Tips</h3>
+<section id="getting-started-tips" class="level3" data-number="1.9.1">
+<h3 data-number="1.9.1"><span class="header-section-number">1.9.1</span> Getting Started Tips</h3>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1224,15 +1259,15 @@ Percentage of multi-category shipments:  23.269809428284855</code></pre>
 </div>
 </section>
 </section>
-<section id="grading-rubric" class="level2">
-<h2>Grading Rubric 🎓</h2>
+<section id="grading-rubric" class="level2" data-number="1.10">
+<h2 data-number="1.10"><span class="header-section-number">1.10</span> Grading Rubric 🎓</h2>
 <p><strong>75% Grade:</strong> Complete discussion questions for at least 5 of the 7 mental models with clear, thoughtful responses.</p>
 <p><strong>85% Grade:</strong> Complete discussion questions for all 7 mental models with comprehensive, well-reasoned responses.</p>
 <p><strong>95% Grade:</strong> Complete all discussion questions plus the “Answering A Business Question” section.</p>
 <p><strong>100% Grade:</strong> Complete all discussion questions plus create a professional visualization showing service level by product category.</p>
 </section>
-<section id="submission-checklist" class="level2">
-<h2>Submission Checklist ✅</h2>
+<section id="submission-checklist" class="level2" data-number="1.11">
+<h2 data-number="1.11"><span class="header-section-number">1.11</span> Submission Checklist ✅</h2>
 <p><strong>Minimum Requirements (Required for Any Points):</strong></p>
 <ul class="task-list">
 <li><label><input type="checkbox" />Created repository named “dataManipulationChallenge” in your GitHub account</label></li>

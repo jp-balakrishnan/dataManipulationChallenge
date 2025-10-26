@@ -346,7 +346,7 @@ First few rows of product line data:
 <p><strong>Question 1: Data Types and Date Handling</strong> - What is the <code>dtype</code> of the <code>actualShipDate</code> series? How can you find out using code? - Why is it important that both <code>actualShipDate</code> and <code>plannedShipDate</code> have the same data type for comparison?</p>
 <p><strong>Question 2: String vs Date Comparison</strong> - Can you give an example where comparing two dates as strings would yield unintuitive results, e.g. what happens if you try to compare “04-11-2025” and “05-20-2024” as strings vs as dates?</p>
 <p><strong>Question 3: Debug This Code</strong></p>
-<div id="3ec0e90d" class="cell" data-execution_count="3">
+<div id="debug-this-code" class="cell" data-message="false" data-execution_count="3">
 <div class="sourceCode" id="cb5"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code has an error - can you spot it?</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    shipments_with_lateness <span class="op">=</span> (</span>
@@ -377,11 +377,11 @@ The &#39;is_late&#39; column doesn&#39;t exist in shipments_df yet</code></pre>
 <p><strong>Question 1: Data Types and Date Handling</strong> - What is the <code>dtype</code> of the <code>actualShipDate</code> series? How can you find out using code?</p>
 <p>actualShipDate is a datetime object</p>
 <p>Function to use: “dtype” to find the data type of the actualShipDate column</p>
-<p>shipments_with_lateness.dtype gives data type of all columns in the entire dataframe;</p>
+<pre><code>* `shipments_with_lateness.dtype` gives data type of all columns in the entire dataframe; </code></pre>
 <p>To get the data type of a specific column, use the column name as a key in the dataframe.</p>
-<p>shipments_with_lateness[‘actualShipDate’].dtype gives data type of actualShipDate column</p>
-<div id="caa7e7fb" class="cell" data-execution_count="4">
-<div class="sourceCode" id="cb7"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;The dtype of the actualShipDate is </span><span class="sc">{}</span><span class="st"> and plannedShipDate is </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>].dtype, shipments_with_lateness[<span class="st">&#39;plannedShipDate&#39;</span>].dtype))</span></code></pre></div>
+<pre><code>* `shipments_with_lateness[&#39;actualShipDate&#39;].dtype` gives data type of actualShipDate column</code></pre>
+<div id="dtype-example" class="cell" data-message="false" data-execution_count="4">
+<div class="sourceCode" id="cb9"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;The dtype of the actualShipDate is </span><span class="sc">{}</span><span class="st"> and plannedShipDate is </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>].dtype, shipments_with_lateness[<span class="st">&#39;plannedShipDate&#39;</span>].dtype))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>The dtype of the actualShipDate is datetime64[ns] and plannedShipDate is datetime64[ns]</code></pre>
 </div>
@@ -392,12 +392,12 @@ The &#39;is_late&#39; column doesn&#39;t exist in shipments_df yet</code></pre>
 <p>Datatime is chronological, so it’s important to compare them as datetime objects. If they are not the same data type, it will raise a TypeError.</p>
 <p>Also datetime object have methods specific to date manipulation, get various attributes of the date like day, month, year, etc.</p>
 <p>Both <code>actualShipDate</code> and <code>plannedShipDate</code> are datetime objects, so we can safely: - Compare them directly (<code>actualShipDate &gt; plannedShipDate</code>) - Calculate time differences (<code>actualShipDate - plannedShipDate</code>) - Use datetime methods (<code>.dt.days</code>, <code>.dt.month</code>, etc.)</p>
-<div id="2028d2ca" class="cell" data-execution_count="5">
-<div class="sourceCode" id="cb9"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Compare actualShipDate and plannedShipDate: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>] <span class="op">&gt;</span> shipments_with_lateness[<span class="st">&#39;plannedShipDate&#39;</span>][<span class="dv">0</span>])</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Calculate time difference: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>] <span class="op">-</span> shipments_with_lateness[<span class="st">&#39;plannedShipDate&#39;</span>][<span class="dv">0</span>])</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Get day: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>].day)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Get month: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>].month)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Get year: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>].year)</span></code></pre></div>
+<div id="compare-dates" class="cell" data-message="false" data-execution_count="5">
+<div class="sourceCode" id="cb11"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Compare actualShipDate and plannedShipDate: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>] <span class="op">&gt;</span> shipments_with_lateness[<span class="st">&#39;plannedShipDate&#39;</span>][<span class="dv">0</span>])</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Calculate time difference: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>] <span class="op">-</span> shipments_with_lateness[<span class="st">&#39;plannedShipDate&#39;</span>][<span class="dv">0</span>])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Get day: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>].day)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Get month: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>].month)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Get year: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>].year)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Compare actualShipDate and plannedShipDate:  False
 Calculate time difference:  -33 days +00:00:00
@@ -412,15 +412,15 @@ Get year:  2013</code></pre>
 <ol type="1">
 <li>When we compare String”04-11-2025” and DateTime “05-20-2024”, TypeError is thrown because Python cannot directly compare datetime objects with strings</li>
 </ol>
-<div id="ebd9421d" class="cell" data-execution_count="6">
-<div class="sourceCode" id="cb11"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>date_obj <span class="op">=</span> datetime(<span class="dv">2024</span>, <span class="dv">5</span>, <span class="dv">20</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>date_str <span class="op">=</span> <span class="st">&quot;2024-05-20&quot;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This will raise TypeError: can&#39;t compare datetime.datetime to str</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(date_obj <span class="op">&gt;</span> date_str)  <span class="co"># ERROR!</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">TypeError</span> <span class="im">as</span> e:</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Error caught: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Cannot compare datetime object with string directly&quot;</span>)</span></code></pre></div>
+<div id="compare-date-string-and-datetime-1" class="cell" data-execution_count="6">
+<div class="sourceCode" id="cb13"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>date_obj <span class="op">=</span> datetime(<span class="dv">2024</span>, <span class="dv">5</span>, <span class="dv">20</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>date_str <span class="op">=</span> <span class="st">&quot;2024-05-20&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This will raise TypeError: can&#39;t compare datetime.datetime to str</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(date_obj <span class="op">&gt;</span> date_str)  <span class="co"># ERROR!</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">TypeError</span> <span class="im">as</span> e:</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Error caught: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Cannot compare datetime object with string directly&quot;</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error caught: &#39;&gt;&#39; not supported between instances of &#39;datetime.datetime&#39; and &#39;str&#39;
 Cannot compare datetime object with string directly</code></pre>
@@ -429,15 +429,15 @@ Cannot compare datetime object with string directly</code></pre>
 <ol start="2" type="1">
 <li>When we compare String “04-11-2025” and String “05-20-2024” of same format, python compares them lexicographically (alphabetically), not chronologically:</li>
 </ol>
-<div id="c6e17b6d" class="cell" data-execution_count="7">
-<div class="sourceCode" id="cb13"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># String comparison (lexicographic)</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Compare String &#39;04-11-2025 &gt; 05-20-2024&#39;: &quot;</span>, <span class="st">&quot;04-11-2025&quot;</span> <span class="op">&gt;</span> <span class="st">&quot;05-20-2024&quot;</span>)  <span class="co"># False </span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Date comparison (chronological)</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>date1 <span class="op">=</span> datetime(<span class="dv">2025</span>, <span class="dv">4</span>, <span class="dv">11</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>date2 <span class="op">=</span> datetime(<span class="dv">2024</span>, <span class="dv">5</span>, <span class="dv">20</span>)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Compare Datetime &#39;04-11-2025 &gt; 05-20-2024&#39;: &quot;</span>, date1 <span class="op">&gt;</span> date2)  <span class="co"># True (correct!)</span></span></code></pre></div>
+<div id="compare-date-string-and-datetime-2" class="cell" data-message="false" data-execution_count="7">
+<div class="sourceCode" id="cb15"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># String comparison (lexicographic)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Compare String &#39;04-11-2025 &gt; 05-20-2024&#39;: &quot;</span>, <span class="st">&quot;04-11-2025&quot;</span> <span class="op">&gt;</span> <span class="st">&quot;05-20-2024&quot;</span>)  <span class="co"># False </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Date comparison (chronological)</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>date1 <span class="op">=</span> datetime(<span class="dv">2025</span>, <span class="dv">4</span>, <span class="dv">11</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>date2 <span class="op">=</span> datetime(<span class="dv">2024</span>, <span class="dv">5</span>, <span class="dv">20</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Compare Datetime &#39;04-11-2025 &gt; 05-20-2024&#39;: &quot;</span>, date1 <span class="op">&gt;</span> date2)  <span class="co"># True (correct!)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Compare String &#39;04-11-2025 &gt; 05-20-2024&#39;:  False
 Compare Datetime &#39;04-11-2025 &gt; 05-20-2024&#39;:  True</code></pre>
@@ -453,15 +453,15 @@ Compare Datetime &#39;04-11-2025 &gt; 05-20-2024&#39;:  True</code></pre>
 </ul></li>
 </ol>
 <p>Best Practice: Always convert strings to datetime objects before comparison:</p>
-<div id="fe493404" class="cell" data-execution_count="8">
-<div class="sourceCode" id="cb15"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>date_str1 <span class="op">=</span> <span class="st">&quot;2024-05-20&quot;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>date_str2 <span class="op">=</span> <span class="st">&quot;2024-04-11&quot;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dt1 <span class="op">=</span> datetime.strptime(date_str1, <span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>dt2 <span class="op">=</span> datetime.strptime(date_str2, <span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Data type of dt1: &quot;</span>, <span class="bu">type</span>(dt1))</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Data type of dt2: &quot;</span>, <span class="bu">type</span>(dt2))</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Compare Datetime &#39;2024-05-20 &gt; 2024-04-11&#39;: &quot;</span>, dt1 <span class="op">&gt;</span> dt2) </span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Are dt1 and dt2 same data type? &quot;</span>, <span class="bu">type</span>(dt1) <span class="op">==</span> <span class="bu">type</span>(dt2))  </span></code></pre></div>
+<div id="compare-date-string-and-datetime-3" class="cell" data-message="false" data-execution_count="8">
+<div class="sourceCode" id="cb17"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>date_str1 <span class="op">=</span> <span class="st">&quot;2024-05-20&quot;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>date_str2 <span class="op">=</span> <span class="st">&quot;2024-04-11&quot;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dt1 <span class="op">=</span> datetime.strptime(date_str1, <span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>dt2 <span class="op">=</span> datetime.strptime(date_str2, <span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Data type of dt1: &quot;</span>, <span class="bu">type</span>(dt1))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Data type of dt2: &quot;</span>, <span class="bu">type</span>(dt2))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Compare Datetime &#39;2024-05-20 &gt; 2024-04-11&#39;: &quot;</span>, dt1 <span class="op">&gt;</span> dt2) </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Are dt1 and dt2 same data type? &quot;</span>, <span class="bu">type</span>(dt1) <span class="op">==</span> <span class="bu">type</span>(dt2))  </span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Data type of dt1:  &lt;class &#39;datetime.datetime&#39;&gt;
 Data type of dt2:  &lt;class &#39;datetime.datetime&#39;&gt;
@@ -473,20 +473,20 @@ Are dt1 and dt2 same data type?  True</code></pre>
 <p>What’s wrong with the <code>lateStatement</code> assignment and how would you fix it?</p>
 <p>Problem is accessing <code>shipments_df['is_late']</code> before the <code>is_late</code> column is created. Until assign method is complete, <code>is_late</code> is not yet created.</p>
 <p>Fix the code by using a lambda function to reference internally created column <code>is_late</code> using reference the current dataframe <code>df</code>.</p>
-<div id="b2feb347" class="cell" data-execution_count="9">
-<div class="sourceCode" id="cb17"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>shipments_with_lateness <span class="op">=</span> (</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    shipments_df</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        is_late<span class="op">=</span><span class="kw">lambda</span> df: df[<span class="st">&#39;actualShipDate&#39;</span>] <span class="op">&gt;</span> df[<span class="st">&#39;plannedShipDate&#39;</span>],</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        days_late<span class="op">=</span><span class="kw">lambda</span> df: (df[<span class="st">&#39;actualShipDate&#39;</span>] <span class="op">-</span> df[<span class="st">&#39;plannedShipDate&#39;</span>]).dt.days,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        lateStatement<span class="op">=</span><span class="kw">lambda</span> df: df[<span class="st">&#39;is_late&#39;</span>].<span class="bu">map</span>({<span class="va">True</span>: <span class="st">&quot;Darn Shipment is Late&quot;</span>, <span class="va">False</span>: <span class="st">&quot;Shipment is on Time&quot;</span>})</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Late Statement: &quot;</span>, shipments_with_lateness[<span class="st">&#39;lateStatement&#39;</span>][<span class="dv">0</span>])</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Is late: &quot;</span>, shipments_with_lateness[<span class="st">&#39;is_late&#39;</span>][<span class="dv">0</span>])</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Days late: &quot;</span>, shipments_with_lateness[<span class="st">&#39;days_late&#39;</span>][<span class="dv">0</span>])</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Actual Ship Date: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>])</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Planned Ship Date: &quot;</span>, shipments_with_lateness[<span class="st">&#39;plannedShipDate&#39;</span>][<span class="dv">0</span>])</span></code></pre></div>
+<div id="ef91a0c9" class="cell" data-message="false" data-execution_count="9">
+<div class="sourceCode" id="cb19"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>shipments_with_lateness <span class="op">=</span> (</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    shipments_df</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        is_late<span class="op">=</span><span class="kw">lambda</span> df: df[<span class="st">&#39;actualShipDate&#39;</span>] <span class="op">&gt;</span> df[<span class="st">&#39;plannedShipDate&#39;</span>],</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        days_late<span class="op">=</span><span class="kw">lambda</span> df: (df[<span class="st">&#39;actualShipDate&#39;</span>] <span class="op">-</span> df[<span class="st">&#39;plannedShipDate&#39;</span>]).dt.days,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        lateStatement<span class="op">=</span><span class="kw">lambda</span> df: df[<span class="st">&#39;is_late&#39;</span>].<span class="bu">map</span>({<span class="va">True</span>: <span class="st">&quot;Darn Shipment is Late&quot;</span>, <span class="va">False</span>: <span class="st">&quot;Shipment is on Time&quot;</span>})</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Late Statement: &quot;</span>, shipments_with_lateness[<span class="st">&#39;lateStatement&#39;</span>][<span class="dv">0</span>])</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Is late: &quot;</span>, shipments_with_lateness[<span class="st">&#39;is_late&#39;</span>][<span class="dv">0</span>])</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Days late: &quot;</span>, shipments_with_lateness[<span class="st">&#39;days_late&#39;</span>][<span class="dv">0</span>])</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Actual Ship Date: &quot;</span>, shipments_with_lateness[<span class="st">&#39;actualShipDate&#39;</span>][<span class="dv">0</span>])</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Planned Ship Date: &quot;</span>, shipments_with_lateness[<span class="st">&#39;plannedShipDate&#39;</span>][<span class="dv">0</span>])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Late Statement:  Shipment is on Time
 Is late:  False
@@ -502,16 +502,16 @@ Planned Ship Date:  2013-11-06 00:00:00</code></pre>
 <p><strong>Mental Model:</strong> Query rows based on conditions and filter to keep specific columns.</p>
 <p>Let’s query for only late shipments and filter to keep the columns we need:</p>
 <div id="mental-model-2-subset" class="cell" data-execution_count="10">
-<div class="sourceCode" id="cb19"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Query rows for late shipments and filter to keep specific columns</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>late_shipments <span class="op">=</span> (</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    shipments_with_lateness</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">&#39;is_late == True&#39;</span>)  <span class="co"># Query rows where is_late is True</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>([<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;plannedShipDate&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>, <span class="st">&#39;days_late&#39;</span>])  <span class="co"># Filter to keep specific columns</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Found </span><span class="sc">{</span><span class="bu">len</span>(late_shipments)<span class="sc">}</span><span class="ss"> late shipments out of </span><span class="sc">{</span><span class="bu">len</span>(shipments_with_lateness)<span class="sc">}</span><span class="ss"> total&quot;</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Late shipments sample:&quot;</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(late_shipments.head())</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Query rows for late shipments and filter to keep specific columns</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>late_shipments <span class="op">=</span> (</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    shipments_with_lateness</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">&#39;is_late == True&#39;</span>)  <span class="co"># Query rows where is_late is True</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>([<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;plannedShipDate&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>, <span class="st">&#39;days_late&#39;</span>])  <span class="co"># Filter to keep specific columns</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Found </span><span class="sc">{</span><span class="bu">len</span>(late_shipments)<span class="sc">}</span><span class="ss"> late shipments out of </span><span class="sc">{</span><span class="bu">len</span>(shipments_with_lateness)<span class="sc">}</span><span class="ss"> total&quot;</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Late shipments sample:&quot;</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(late_shipments.head())</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Found 456 late shipments out of 4000 total
 
@@ -565,14 +565,14 @@ Late shipments sample:
 </ul>
 <p><strong>Question 2: Additional Row Querying</strong> - Can you show an example of using a variable like <code>late_threshold</code> to query rows for shipments that are at least <code>late_threshold</code> days late, e.g. what if you wanted to query rows for shipments that are at least 5 days late?</p>
 <p>Define a variable <code>late_threshold</code> and then use it in query using string inplace replacement of the variable.</p>
-<div id="a890a7ec" class="cell" data-execution_count="11">
-<div class="sourceCode" id="cb21"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>late_threshold <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Define late_thresold variable; Late threshold: &quot;</span>, late_threshold)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total Number of shipments: &quot;</span>, <span class="bu">len</span>(shipments_with_lateness))</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>late_shipments <span class="op">=</span> shipments_with_lateness.query(<span class="ss">f&#39;days_late &gt;= </span><span class="sc">{</span>late_threshold<span class="sc">}</span><span class="ss">&#39;</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of late shipments: &quot;</span>, <span class="bu">len</span>(late_shipments))</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Show first 5 rows of late shipments: &quot;</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(late_shipments.head())</span></code></pre></div>
+<div id="additional-row-querying" class="cell" data-message="false" data-execution_count="11">
+<div class="sourceCode" id="cb23"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>late_threshold <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Define late_thresold variable; Late threshold: &quot;</span>, late_threshold)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total Number of shipments: &quot;</span>, <span class="bu">len</span>(shipments_with_lateness))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>late_shipments <span class="op">=</span> shipments_with_lateness.query(<span class="ss">f&#39;days_late &gt;= </span><span class="sc">{</span>late_threshold<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of late shipments: &quot;</span>, <span class="bu">len</span>(late_shipments))</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Show first 5 rows of late shipments: &quot;</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(late_shipments.head())</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Define late_thresold variable; Late threshold:  5
 Total Number of shipments:  4000
@@ -600,16 +600,16 @@ Show first 5 rows of late shipments:
 <p><strong>Mental Model:</strong> Remove columns or rows you don’t need.</p>
 <p>Let’s clean up our data by removing unnecessary columns:</p>
 <div id="mental-model-3-drop" class="cell" data-execution_count="12">
-<div class="sourceCode" id="cb23"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a cleaner dataset by dropping unnecessary columns</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>clean_shipments <span class="op">=</span> (</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    shipments_with_lateness</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    .drop(columns<span class="op">=</span>[<span class="st">&#39;quantity&#39;</span>])  <span class="co"># Drop quantity column (not needed for our analysis)</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    .dropna(subset<span class="op">=</span>[<span class="st">&#39;plannedShipDate&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>])  <span class="co"># Remove rows with missing dates</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Shipments dataset: </span><span class="sc">{</span><span class="bu">len</span>(shipments_with_lateness)<span class="sc">}</span><span class="ss"> rows, </span><span class="sc">{</span><span class="bu">len</span>(shipments_with_lateness.columns)<span class="sc">}</span><span class="ss"> columns&quot;</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Cleaned dataset: </span><span class="sc">{</span><span class="bu">len</span>(clean_shipments)<span class="sc">}</span><span class="ss"> rows, </span><span class="sc">{</span><span class="bu">len</span>(clean_shipments.columns)<span class="sc">}</span><span class="ss"> columns&quot;</span>)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Remaining columns:&quot;</span>, clean_shipments.columns.tolist())</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a cleaner dataset by dropping unnecessary columns</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>clean_shipments <span class="op">=</span> (</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    shipments_with_lateness</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    .drop(columns<span class="op">=</span>[<span class="st">&#39;quantity&#39;</span>])  <span class="co"># Drop quantity column (not needed for our analysis)</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    .dropna(subset<span class="op">=</span>[<span class="st">&#39;plannedShipDate&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>])  <span class="co"># Remove rows with missing dates</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Shipments dataset: </span><span class="sc">{</span><span class="bu">len</span>(shipments_with_lateness)<span class="sc">}</span><span class="ss"> rows, </span><span class="sc">{</span><span class="bu">len</span>(shipments_with_lateness.columns)<span class="sc">}</span><span class="ss"> columns&quot;</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Cleaned dataset: </span><span class="sc">{</span><span class="bu">len</span>(clean_shipments)<span class="sc">}</span><span class="ss"> rows, </span><span class="sc">{</span><span class="bu">len</span>(clean_shipments.columns)<span class="sc">}</span><span class="ss"> columns&quot;</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Remaining columns:&quot;</span>, clean_shipments.columns.tolist())</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shipments dataset: 4000 rows, 8 columns
 Cleaned dataset: 4000 rows, 7 columns
@@ -634,10 +634,10 @@ Remaining columns: [&#39;shipID&#39;, &#39;plannedShipDate&#39;, &#39;actualShip
 <h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Drop vs Filter Strategies</strong> - What’s the difference between <code>.drop(columns=['quantity'])</code> and <code>.filter()</code> with a list of columns you want to keep?</p>
 <p>.drop(columns=[‘quantity’]) is dropping the quantity column from the dataframe. .filter() is filtering the dataframe to keep only the columns in the list. This is more explicit and easier to understand. It’s easier to debug and maintain. We can also use .drop(columns=[‘quantity’]) to drop multiple columns at once.</p>
-<div id="4c9656d4" class="cell" data-execution_count="13">
-<div class="sourceCode" id="cb25"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe: &quot;</span>, clean_shipments.columns.tolist())</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe after dropping quantity column: &quot;</span>, clean_shipments.drop(columns<span class="op">=</span>[<span class="st">&#39;shipID&#39;</span>]).columns.tolist())</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe after filtering to keep only the columns in the list: &quot;</span>, clean_shipments.<span class="bu">filter</span>([<span class="st">&#39;partID&#39;</span>, <span class="st">&#39;plannedShipDate&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>, <span class="st">&#39;days_late&#39;</span>]).columns.tolist())</span></code></pre></div>
+<div id="drop-vs-filter-strategies" class="cell" data-message="false" data-execution_count="13">
+<div class="sourceCode" id="cb27"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe: &quot;</span>, clean_shipments.columns.tolist())</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe after dropping quantity column: &quot;</span>, clean_shipments.drop(columns<span class="op">=</span>[<span class="st">&#39;shipID&#39;</span>]).columns.tolist())</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe after filtering to keep only the columns in the list: &quot;</span>, clean_shipments.<span class="bu">filter</span>([<span class="st">&#39;partID&#39;</span>, <span class="st">&#39;plannedShipDate&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>, <span class="st">&#39;days_late&#39;</span>]).columns.tolist())</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Columns in the dataframe:  [&#39;shipID&#39;, &#39;plannedShipDate&#39;, &#39;actualShipDate&#39;, &#39;partID&#39;, &#39;is_late&#39;, &#39;days_late&#39;, &#39;lateStatement&#39;]
 Columns in the dataframe after dropping quantity column:  [&#39;plannedShipDate&#39;, &#39;actualShipDate&#39;, &#39;partID&#39;, &#39;is_late&#39;, &#39;days_late&#39;, &#39;lateStatement&#39;]
@@ -653,10 +653,10 @@ Columns in the dataframe after filtering to keep only the columns in the list:  
 </ol>
 <p><strong>Question 2: Handling Missing Data</strong> - What happens if you use <code>.dropna()</code> without specifying <code>subset</code>? How is this different from <code>.dropna(subset=['plannedShipDate', 'actualShipDate'])</code>?</p>
 <p>If you use <code>.dropna()</code> without specifying <code>subset</code>, it will drop all rows with any missing values in any column. If you use <code>.dropna(subset=['plannedShipDate', 'actualShipDate'])</code>, it will drop rows with missing values in only the <code>plannedShipDate</code> and <code>actualShipDate</code> columns. This is more selective and efficient. - Why might you want to be selective about which columns to check for missing values? Data analysis is about focusing on the relevant columns and data. If you don’t need to check for missing values in all columns, it’s more efficient and easier to understand. Say each column is a feature and based on domain/context, you may not need to check for missing values in all columns. example if you are analyzing a dataset of customer orders, you may not need to check for missing values in the order created-by user column if you are only interested in the order amount.</p>
-<div id="6b3acd9d" class="cell" data-execution_count="14">
-<div class="sourceCode" id="cb27"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe: &quot;</span>, clean_shipments.columns.tolist())</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe after dropping missing values: &quot;</span>, clean_shipments.dropna().columns.tolist())</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe after dropping missing values in subset: &quot;</span>, clean_shipments.dropna(subset<span class="op">=</span>[<span class="st">&#39;plannedShipDate&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>]).columns.tolist())</span></code></pre></div>
+<div id="handling-missing-data" class="cell" data-message="false" data-execution_count="14">
+<div class="sourceCode" id="cb29"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe: &quot;</span>, clean_shipments.columns.tolist())</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe after dropping missing values: &quot;</span>, clean_shipments.dropna().columns.tolist())</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Columns in the dataframe after dropping missing values in subset: &quot;</span>, clean_shipments.dropna(subset<span class="op">=</span>[<span class="st">&#39;plannedShipDate&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>]).columns.tolist())</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Columns in the dataframe:  [&#39;shipID&#39;, &#39;plannedShipDate&#39;, &#39;actualShipDate&#39;, &#39;partID&#39;, &#39;is_late&#39;, &#39;days_late&#39;, &#39;lateStatement&#39;]
 Columns in the dataframe after dropping missing values:  [&#39;shipID&#39;, &#39;plannedShipDate&#39;, &#39;actualShipDate&#39;, &#39;partID&#39;, &#39;is_late&#39;, &#39;days_late&#39;, &#39;lateStatement&#39;]
@@ -670,15 +670,15 @@ Columns in the dataframe after dropping missing values in subset:  [&#39;shipID&
 <p><strong>Mental Model:</strong> Order data by values or indices.</p>
 <p>Let’s sort by lateness to see the worst offenders:</p>
 <div id="mental-model-4-sort" class="cell" data-execution_count="15">
-<div class="sourceCode" id="cb29"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by days late (worst first)</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sorted_by_lateness <span class="op">=</span> (</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    clean_shipments</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">&#39;days_late&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)  <span class="co"># Sort by days_late, highest first</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    .reset_index(drop<span class="op">=</span><span class="va">True</span>)  <span class="co"># Reset index to be sequential</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments sorted by lateness (worst first):&quot;</span>)</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sorted_by_lateness[[<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;days_late&#39;</span>, <span class="st">&#39;is_late&#39;</span>]].head(<span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by days late (worst first)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>sorted_by_lateness <span class="op">=</span> (</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    clean_shipments</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">&#39;days_late&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)  <span class="co"># Sort by days_late, highest first</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    .reset_index(drop<span class="op">=</span><span class="va">True</span>)  <span class="co"># Reset index to be sequential</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments sorted by lateness (worst first):&quot;</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sorted_by_lateness[[<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;days_late&#39;</span>, <span class="st">&#39;is_late&#39;</span>]].head(<span class="dv">10</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shipments sorted by lateness (worst first):
    shipID       partID  days_late  is_late
@@ -712,11 +712,11 @@ Columns in the dataframe after dropping missing values in subset:  [&#39;shipID&
 <h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Sorting Strategies</strong> - What’s the difference between <code>ascending=False</code> and <code>ascending=True</code> in sorting?</p>
 <p><code>ascending=False</code> sorts in descending order. <code>ascending=True</code> sorts in ascending order.</p>
-<div id="18c84cb8" class="cell" data-execution_count="16">
-<div class="sourceCode" id="cb31"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments sorted by lateness (worst first):&quot;</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sorted_by_lateness[[<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;days_late&#39;</span>, <span class="st">&#39;is_late&#39;</span>]].sort_values(<span class="st">&#39;days_late&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>))</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments sorted by lateness (best first):&quot;</span>)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sorted_by_lateness[[<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;days_late&#39;</span>, <span class="st">&#39;is_late&#39;</span>]].sort_values(<span class="st">&#39;days_late&#39;</span>, ascending<span class="op">=</span><span class="va">True</span>).head(<span class="dv">10</span>))</span></code></pre></div>
+<div id="sorting-strategies-1" class="cell" data-message="false" data-execution_count="16">
+<div class="sourceCode" id="cb33"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments sorted by lateness (worst first):&quot;</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sorted_by_lateness[[<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;days_late&#39;</span>, <span class="st">&#39;is_late&#39;</span>]].sort_values(<span class="st">&#39;days_late&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments sorted by lateness (best first):&quot;</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sorted_by_lateness[[<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;days_late&#39;</span>, <span class="st">&#39;is_late&#39;</span>]].sort_values(<span class="st">&#39;days_late&#39;</span>, ascending<span class="op">=</span><span class="va">True</span>).head(<span class="dv">10</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shipments sorted by lateness (worst first):
    shipID       partID  days_late  is_late
@@ -748,9 +748,9 @@ Shipments sorted by lateness (best first):
 <li>How would you sort by multiple columns (e.g., first by <code>is_late</code>, then by <code>days_late</code>)? S</li>
 </ul>
 <p>Sort by <code>is_late</code> in descending order, then by <code>days_late</code> in ascending order. This is to ensure that the shipments that are late are sorted first, and then the shipments that are on time are sorted by the number of days late.</p>
-<div id="7a1b9788" class="cell" data-execution_count="17">
-<div class="sourceCode" id="cb33"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments sorted by is_late (worst first) and then by days_late (best first):&quot;</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sorted_by_lateness[[<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;days_late&#39;</span>, <span class="st">&#39;is_late&#39;</span>]].sort_values([<span class="st">&#39;is_late&#39;</span>, <span class="st">&#39;days_late&#39;</span>], ascending<span class="op">=</span>[<span class="va">False</span>, <span class="va">True</span>]).head(<span class="dv">10</span>))</span></code></pre></div>
+<div id="sorting-strategies-2" class="cell" data-message="false" data-execution_count="17">
+<div class="sourceCode" id="cb35"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments sorted by is_late (worst first) and then by days_late (best first):&quot;</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sorted_by_lateness[[<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;partID&#39;</span>, <span class="st">&#39;days_late&#39;</span>, <span class="st">&#39;is_late&#39;</span>]].sort_values([<span class="st">&#39;is_late&#39;</span>, <span class="st">&#39;days_late&#39;</span>], ascending<span class="op">=</span>[<span class="va">False</span>, <span class="va">True</span>]).head(<span class="dv">10</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shipments sorted by is_late (worst first) and then by days_late (best first):
      shipID       partID  days_late  is_late
@@ -769,9 +769,9 @@ Shipments sorted by lateness (best first):
 <p><strong>Question 2: Index Management</strong> - Why do we use <code>.reset_index(drop=True)</code> after sorting? - What happens to the original index when you sort? Why might this be problematic?</p>
 <p><code>.reset_index(drop=True)</code> after sorting is to reset the index to be sequential. This is to ensure that the index is not mixed up with the data.</p>
 <p>The original index is the index of the dataframe before sorting. It is the index of the dataframe after sorting.</p>
-<div id="abf7faec" class="cell" data-execution_count="18">
-<div class="sourceCode" id="cb35"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Original index: &quot;</span>, sorted_by_lateness.index)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Index after sorting: &quot;</span>, sorted_by_lateness.reset_index(drop<span class="op">=</span><span class="va">True</span>).index)</span></code></pre></div>
+<div id="81ce60f7" class="cell" data-message="false" data-execution_count="18">
+<div class="sourceCode" id="cb37"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Original index: &quot;</span>, sorted_by_lateness.index)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Index after sorting: &quot;</span>, sorted_by_lateness.reset_index(drop<span class="op">=</span><span class="va">True</span>).index)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Original index:  RangeIndex(start=0, stop=4000, step=1)
 Index after sorting:  RangeIndex(start=0, stop=4000, step=1)</code></pre>
@@ -784,22 +784,22 @@ Index after sorting:  RangeIndex(start=0, stop=4000, step=1)</code></pre>
 <p><strong>Mental Model:</strong> Calculate summary statistics across groups or the entire dataset.</p>
 <p>Let’s calculate overall service level metrics:</p>
 <div id="mental-model-5-aggregate" class="cell" data-execution_count="19">
-<div class="sourceCode" id="cb37"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate overall service level metrics</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>service_metrics <span class="op">=</span> (</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    clean_shipments</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    .agg({</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;is_late&#39;</span>: [<span class="st">&#39;count&#39;</span>, <span class="st">&#39;sum&#39;</span>, <span class="st">&#39;mean&#39;</span>],  <span class="co"># Count total, count late, calculate percentage</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;days_late&#39;</span>: [<span class="st">&#39;mean&#39;</span>, <span class="st">&#39;max&#39;</span>]  <span class="co"># Average and maximum days late</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">3</span>)</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Overall Service Level Metrics:&quot;</span>)</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(service_metrics)</span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate percentage on-time directly from the data</span></span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>on_time_rate <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> clean_shipments[<span class="st">&#39;is_late&#39;</span>].mean()) <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">On-time delivery rate: </span><span class="sc">{</span>on_time_rate<span class="sc">:.1f}</span><span class="ss">%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate overall service level metrics</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>service_metrics <span class="op">=</span> (</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    clean_shipments</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    .agg({</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;is_late&#39;</span>: [<span class="st">&#39;count&#39;</span>, <span class="st">&#39;sum&#39;</span>, <span class="st">&#39;mean&#39;</span>],  <span class="co"># Count total, count late, calculate percentage</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;days_late&#39;</span>: [<span class="st">&#39;mean&#39;</span>, <span class="st">&#39;max&#39;</span>]  <span class="co"># Average and maximum days late</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Overall Service Level Metrics:&quot;</span>)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(service_metrics)</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate percentage on-time directly from the data</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>on_time_rate <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> clean_shipments[<span class="st">&#39;is_late&#39;</span>].mean()) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">On-time delivery rate: </span><span class="sc">{</span>on_time_rate<span class="sc">:.1f}</span><span class="ss">%&quot;</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Overall Service Level Metrics:
         is_late  days_late
@@ -828,15 +828,15 @@ On-time delivery rate: 88.6%</code></pre>
 <h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Boolean Aggregation</strong> - Why does <code>sum()</code> work on boolean values? What does it count?</p>
 <p>Boolean values are either True or False. Here, true is 1 and false is 0. Sum is a function that adds up the values of a column, here it is adding up the number of True and False values. Basically it adds up all true = 1 and false = 0. So, out of 4000 records, 456 records are late (is_late is TRUE).</p>
-<div id="519d8545" class="cell" data-execution_count="20">
-<div class="sourceCode" id="cb39"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of late shipments: &quot;</span>, service_metrics[<span class="st">&#39;is_late&#39;</span>][<span class="st">&#39;sum&#39;</span>])</span></code></pre></div>
+<div id="boolean-aggregation-1" class="cell" data-message="false" data-execution_count="20">
+<div class="sourceCode" id="cb41"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of late shipments: &quot;</span>, service_metrics[<span class="st">&#39;is_late&#39;</span>][<span class="st">&#39;sum&#39;</span>])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of late shipments:  456.0</code></pre>
 </div>
 </div>
 <p>On other hand, count is a function that counts the number of values in a column. It counts the number of True and False values. SO it counts all records and it means overall number of records.</p>
-<div id="e5654e75" class="cell" data-execution_count="21">
-<div class="sourceCode" id="cb41"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of shipments: &quot;</span>, service_metrics[<span class="st">&#39;is_late&#39;</span>][<span class="st">&#39;count&#39;</span>])</span></code></pre></div>
+<div id="boolean-aggregation-2" class="cell" data-message="false" data-execution_count="21">
+<div class="sourceCode" id="cb43"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of shipments: &quot;</span>, service_metrics[<span class="st">&#39;is_late&#39;</span>][<span class="st">&#39;count&#39;</span>])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of shipments:  4000.0</code></pre>
 </div>
@@ -848,17 +848,17 @@ On-time delivery rate: 88.6%</code></pre>
 <p><strong>Mental Model:</strong> Join data from multiple sources to create richer datasets.</p>
 <p>Now let’s analyze service levels by product category. First, we need to merge our data:</p>
 <div id="mental-model-6-merge-prep" class="cell" data-execution_count="22">
-<div class="sourceCode" id="cb43"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge shipment data with product line data</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>shipments_with_category <span class="op">=</span> (</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    clean_shipments</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    .merge(product_line_df, on<span class="op">=</span><span class="st">&#39;partID&#39;</span>, how<span class="op">=</span><span class="st">&#39;left&#39;</span>)  <span class="co"># Left join to keep all shipments</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>        category_late<span class="op">=</span><span class="kw">lambda</span> df: df[<span class="st">&#39;is_late&#39;</span>] <span class="op">&amp;</span> df[<span class="st">&#39;prodCategory&#39;</span>].notna()  <span class="co"># Only count as late if we have category info</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Product categories available:&quot;</span>)</span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shipments_with_category[<span class="st">&#39;prodCategory&#39;</span>].value_counts())</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge shipment data with product line data</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>shipments_with_category <span class="op">=</span> (</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    clean_shipments</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    .merge(product_line_df, on<span class="op">=</span><span class="st">&#39;partID&#39;</span>, how<span class="op">=</span><span class="st">&#39;left&#39;</span>)  <span class="co"># Left join to keep all shipments</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>        category_late<span class="op">=</span><span class="kw">lambda</span> df: df[<span class="st">&#39;is_late&#39;</span>] <span class="op">&amp;</span> df[<span class="st">&#39;prodCategory&#39;</span>].notna()  <span class="co"># Only count as late if we have category info</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Product categories available:&quot;</span>)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shipments_with_category[<span class="st">&#39;prodCategory&#39;</span>].value_counts())</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Product categories available:
@@ -889,10 +889,10 @@ Name: count, dtype: int64</code></pre>
 <p><strong>Question 1: Join Types and Data Loss</strong> - Why does your professor think we should use <code>how='left'</code> in most cases? - How can you check if any shipments were lost during the merge?</p>
 <p>Left join keeps all records from left dataframe and and only joins the records from the right dataframe that have matching values in the key column. This is to avoid losing data. Inner join keeps only the records that have matching values in both dataframes. There is data loss if there are no matching values in the right dataframe. So, left join is more flexible and avoids data loss.</p>
 <p>We can check if any shipments were lost during the merge by checking if the number of records in the left dataframe is the same as the number of records in the right dataframe after the merge.</p>
-<div id="216092e5" class="cell" data-execution_count="23">
-<div class="sourceCode" id="cb45"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of records in the left dataframe: &quot;</span>, <span class="bu">len</span>(clean_shipments))</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of records in the right dataframe: &quot;</span>, <span class="bu">len</span>(product_line_df))</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of records in the left dataframe after the merge: &quot;</span>, <span class="bu">len</span>(shipments_with_category))</span></code></pre></div>
+<div id="join-types-and-data-loss" class="cell" data-message="false" data-execution_count="23">
+<div class="sourceCode" id="cb47"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of records in the left dataframe: &quot;</span>, <span class="bu">len</span>(clean_shipments))</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of records in the right dataframe: &quot;</span>, <span class="bu">len</span>(product_line_df))</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Number of records in the left dataframe after the merge: &quot;</span>, <span class="bu">len</span>(shipments_with_category))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of records in the left dataframe:  4000
 Number of records in the right dataframe:  11997
@@ -900,34 +900,34 @@ Number of records in the left dataframe after the merge:  4000</code></pre>
 </div>
 </div>
 <p><strong>Question 2: Key Column Matching</strong> - What happens if there are duplicate <code>partID</code> values in the <code>product_line_df</code>?</p>
-<div id="d3bb572b" class="cell" data-execution_count="24">
-<div class="sourceCode" id="cb47"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add entry in shipments_with_category dataframe with partID 1234567890 and prodCategory Marketables using concat</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>new_shipmentrow <span class="op">=</span> pd.DataFrame({<span class="st">&#39;partID&#39;</span>: <span class="st">&#39;1234567890&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>: <span class="st">&#39;2013-10-04&#39;</span>, <span class="st">&#39;plannedShipDate&#39;</span>: <span class="st">&#39;2013-10-04&#39;</span>, <span class="st">&#39;is_late&#39;</span>: <span class="va">False</span>, <span class="st">&#39;days_late&#39;</span>: <span class="dv">0</span>, <span class="st">&#39;shipID&#39;</span>: <span class="st">&#39;100001&#39;</span>}, index<span class="op">=</span>[<span class="dv">0</span>])</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>new_category_rows <span class="op">=</span> [</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&#39;partID&#39;</span>: <span class="st">&#39;1234567890&#39;</span>, <span class="st">&#39;prodCategory&#39;</span>: <span class="st">&#39;Duplicate1&#39;</span>},</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&#39;partID&#39;</span>: <span class="st">&#39;1234567890&#39;</span>, <span class="st">&#39;prodCategory&#39;</span>: <span class="st">&#39;Duplicate2&#39;</span>}</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>cust_clean_shipments <span class="op">=</span> pd.concat([clean_shipments, new_shipmentrow], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>dup_product_line_df <span class="op">=</span> pd.concat([product_line_df, pd.DataFrame(new_category_rows)], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Original shipments_with_category.shape: &quot;</span>, clean_shipments.shape[<span class="dv">0</span>])</span>
-<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;With new shipment row: &quot;</span>, cust_clean_shipments.shape[<span class="dv">0</span>])</span>
-<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Before new category join with duplicates: &quot;</span>, shipments_with_category[<span class="st">&#39;prodCategory&#39;</span>].value_counts())</span>
-<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>dup_shipments_with_category <span class="op">=</span> (</span>
-<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>    cust_clean_shipments</span>
-<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>    .merge(dup_product_line_df, on<span class="op">=</span><span class="st">&#39;partID&#39;</span>, how<span class="op">=</span><span class="st">&#39;left&#39;</span>)  <span class="co"># Left join to keep all shipments</span></span>
-<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
-<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>        category_late<span class="op">=</span><span class="kw">lambda</span> df: df[<span class="st">&#39;is_late&#39;</span>] <span class="op">&amp;</span> df[<span class="st">&#39;prodCategory&#39;</span>].notna()  <span class="co"># Only count as late if we have category info</span></span>
-<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Product categories available:&quot;</span>)</span>
-<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dup_shipments_with_category[<span class="st">&#39;prodCategory&#39;</span>].value_counts())</span>
-<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total number of records after merge: &quot;</span>, dup_shipments_with_category.shape[<span class="dv">0</span>])</span></code></pre></div>
+<div id="key-column-matching" class="cell" data-message="false" data-execution_count="24">
+<div class="sourceCode" id="cb49"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add entry in shipments_with_category dataframe with partID 1234567890 and prodCategory Marketables using concat</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>new_shipmentrow <span class="op">=</span> pd.DataFrame({<span class="st">&#39;partID&#39;</span>: <span class="st">&#39;1234567890&#39;</span>, <span class="st">&#39;actualShipDate&#39;</span>: <span class="st">&#39;2013-10-04&#39;</span>, <span class="st">&#39;plannedShipDate&#39;</span>: <span class="st">&#39;2013-10-04&#39;</span>, <span class="st">&#39;is_late&#39;</span>: <span class="va">False</span>, <span class="st">&#39;days_late&#39;</span>: <span class="dv">0</span>, <span class="st">&#39;shipID&#39;</span>: <span class="st">&#39;100001&#39;</span>}, index<span class="op">=</span>[<span class="dv">0</span>])</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>new_category_rows <span class="op">=</span> [</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&#39;partID&#39;</span>: <span class="st">&#39;1234567890&#39;</span>, <span class="st">&#39;prodCategory&#39;</span>: <span class="st">&#39;Duplicate1&#39;</span>},</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&#39;partID&#39;</span>: <span class="st">&#39;1234567890&#39;</span>, <span class="st">&#39;prodCategory&#39;</span>: <span class="st">&#39;Duplicate2&#39;</span>}</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>cust_clean_shipments <span class="op">=</span> pd.concat([clean_shipments, new_shipmentrow], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>dup_product_line_df <span class="op">=</span> pd.concat([product_line_df, pd.DataFrame(new_category_rows)], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Original shipments_with_category.shape: &quot;</span>, clean_shipments.shape[<span class="dv">0</span>])</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;With new shipment row: &quot;</span>, cust_clean_shipments.shape[<span class="dv">0</span>])</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Before new category join with duplicates: &quot;</span>, shipments_with_category[<span class="st">&#39;prodCategory&#39;</span>].value_counts())</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>dup_shipments_with_category <span class="op">=</span> (</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>    cust_clean_shipments</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>    .merge(dup_product_line_df, on<span class="op">=</span><span class="st">&#39;partID&#39;</span>, how<span class="op">=</span><span class="st">&#39;left&#39;</span>)  <span class="co"># Left join to keep all shipments</span></span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>        category_late<span class="op">=</span><span class="kw">lambda</span> df: df[<span class="st">&#39;is_late&#39;</span>] <span class="op">&amp;</span> df[<span class="st">&#39;prodCategory&#39;</span>].notna()  <span class="co"># Only count as late if we have category info</span></span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Product categories available:&quot;</span>)</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dup_shipments_with_category[<span class="st">&#39;prodCategory&#39;</span>].value_counts())</span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total number of records after merge: &quot;</span>, dup_shipments_with_category.shape[<span class="dv">0</span>])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Original shipments_with_category.shape:  4000
 With new shipment row:  4001
@@ -958,19 +958,19 @@ Total number of records after merge:  4002</code></pre>
 <p><strong>Mental Model:</strong> Group data and apply functions within each group.</p>
 <p>Now let’s analyze service levels by category:</p>
 <div id="mental-model-7-groupby" class="cell" data-execution_count="25">
-<div class="sourceCode" id="cb49"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze service levels by product category</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>service_by_category <span class="op">=</span> (</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    shipments_with_category</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">&#39;prodCategory&#39;</span>)  <span class="co"># Split by product category</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    .agg({</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;is_late&#39;</span>: [<span class="st">&#39;any&#39;</span>, <span class="st">&#39;count&#39;</span>, <span class="st">&#39;sum&#39;</span>, <span class="st">&#39;mean&#39;</span>],  <span class="co"># Count, late count, percentage late</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;days_late&#39;</span>: [<span class="st">&#39;mean&#39;</span>, <span class="st">&#39;max&#39;</span>]  <span class="co"># Average and max days late</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">3</span>)</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Service Level by Product Category:&quot;</span>)</span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(service_by_category)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze service levels by product category</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>service_by_category <span class="op">=</span> (</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    shipments_with_category</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">&#39;prodCategory&#39;</span>)  <span class="co"># Split by product category</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    .agg({</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;is_late&#39;</span>: [<span class="st">&#39;any&#39;</span>, <span class="st">&#39;count&#39;</span>, <span class="st">&#39;sum&#39;</span>, <span class="st">&#39;mean&#39;</span>],  <span class="co"># Count, late count, percentage late</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;days_late&#39;</span>: [<span class="st">&#39;mean&#39;</span>, <span class="st">&#39;max&#39;</span>]  <span class="co"># Average and max days late</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Service Level by Product Category:&quot;</span>)</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(service_by_category)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Service Level by Product Category:
              is_late                   days_late    
@@ -1001,11 +1001,11 @@ SpareParts      True   767  137  0.179    -1.003  21</code></pre>
 <p><strong>Question 1: GroupBy Mechanics</strong> - What does <code>.groupby('prodCategory')</code> actually do? How does it “split” the data? - Why do we need to use <code>.agg()</code> after grouping? What happens if you don’t?</p>
 <p><code>.groupby('prodCategory')</code> splits the data into groups based on the <code>prodCategory</code> column. <code>.agg()</code> is used to apply aggregation functions to the grouped data.</p>
 <p>If you don’t use <code>.agg()</code>, you will get the raw data without any aggregation.</p>
-<div id="a2185f45" class="cell" data-execution_count="26">
-<div class="sourceCode" id="cb51"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Grouped data without aggregation:&quot;</span>)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shipments_with_category.groupby(<span class="st">&#39;prodCategory&#39;</span>).head(<span class="dv">1</span>))</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Grouped data with aggregation:&quot;</span>)</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shipments_with_category.groupby(<span class="st">&#39;prodCategory&#39;</span>).agg({<span class="st">&#39;is_late&#39;</span>: <span class="st">&#39;any&#39;</span>, <span class="st">&#39;days_late&#39;</span>: <span class="st">&#39;max&#39;</span>}).head(<span class="dv">1</span>))</span></code></pre></div>
+<div id="groupby-mechanics" class="cell" data-message="false" data-execution_count="26">
+<div class="sourceCode" id="cb53"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Grouped data without aggregation:&quot;</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shipments_with_category.groupby(<span class="st">&#39;prodCategory&#39;</span>).head(<span class="dv">1</span>))</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Grouped data with aggregation:&quot;</span>)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shipments_with_category.groupby(<span class="st">&#39;prodCategory&#39;</span>).agg({<span class="st">&#39;is_late&#39;</span>: <span class="st">&#39;any&#39;</span>, <span class="st">&#39;days_late&#39;</span>: <span class="st">&#39;max&#39;</span>}).head(<span class="dv">1</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Grouped data without aggregation:
     shipID plannedShipDate actualShipDate       partID  is_late  days_late  \
@@ -1036,25 +1036,25 @@ Liquids          True         19</code></pre>
 <p><strong>Mental Model:</strong> Combine multiple data manipulation techniques to answer complex business questions.</p>
 <p>Let’s create a comprehensive analysis by combining shipment-level data with category information:</p>
 <div id="mental-model-7-comprehensive" class="cell" data-execution_count="27">
-<div class="sourceCode" id="cb53"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a comprehensive analysis dataset</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>comprehensive_analysis <span class="op">=</span> (</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    shipments_with_category</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;prodCategory&#39;</span>])  <span class="co"># Group by shipment and category</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    .agg({</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;is_late&#39;</span>: <span class="st">&#39;any&#39;</span>,  <span class="co"># True if any item in this shipment/category is late</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;days_late&#39;</span>: <span class="st">&#39;max&#39;</span>  <span class="co"># Maximum days late for this shipment/category</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>        has_multiple_categories<span class="op">=</span><span class="kw">lambda</span> df: df.groupby(<span class="st">&#39;shipID&#39;</span>)[<span class="st">&#39;prodCategory&#39;</span>].transform(<span class="st">&#39;nunique&#39;</span>) <span class="op">&gt;</span> <span class="dv">1</span></span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Comprehensive analysis - shipments with multiple categories:&quot;</span>)</span>
-<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>multi_category_shipments <span class="op">=</span> comprehensive_analysis[comprehensive_analysis[<span class="st">&#39;has_multiple_categories&#39;</span>]]</span>
-<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Shipments with multiple categories: </span><span class="sc">{</span>multi_category_shipments[<span class="st">&#39;shipID&#39;</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Total unique shipments: </span><span class="sc">{</span>comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Percentage with multiple categories: </span><span class="sc">{</span>multi_category_shipments[<span class="st">&#39;shipID&#39;</span>]<span class="sc">.</span>nunique() <span class="op">/</span> comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>]<span class="sc">.</span>nunique() <span class="op">*</span> <span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a comprehensive analysis dataset</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>comprehensive_analysis <span class="op">=</span> (</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    shipments_with_category</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">&#39;shipID&#39;</span>, <span class="st">&#39;prodCategory&#39;</span>])  <span class="co"># Group by shipment and category</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    .agg({</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;is_late&#39;</span>: <span class="st">&#39;any&#39;</span>,  <span class="co"># True if any item in this shipment/category is late</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;days_late&#39;</span>: <span class="st">&#39;max&#39;</span>  <span class="co"># Maximum days late for this shipment/category</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>        has_multiple_categories<span class="op">=</span><span class="kw">lambda</span> df: df.groupby(<span class="st">&#39;shipID&#39;</span>)[<span class="st">&#39;prodCategory&#39;</span>].transform(<span class="st">&#39;nunique&#39;</span>) <span class="op">&gt;</span> <span class="dv">1</span></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Comprehensive analysis - shipments with multiple categories:&quot;</span>)</span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>multi_category_shipments <span class="op">=</span> comprehensive_analysis[comprehensive_analysis[<span class="st">&#39;has_multiple_categories&#39;</span>]]</span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Shipments with multiple categories: </span><span class="sc">{</span>multi_category_shipments[<span class="st">&#39;shipID&#39;</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Total unique shipments: </span><span class="sc">{</span>comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Percentage with multiple categories: </span><span class="sc">{</span>multi_category_shipments[<span class="st">&#39;shipID&#39;</span>]<span class="sc">.</span>nunique() <span class="op">/</span> comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>]<span class="sc">.</span>nunique() <span class="op">*</span> <span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%&quot;</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Comprehensive analysis - shipments with multiple categories:
 Shipments with multiple categories: 232
@@ -1078,11 +1078,11 @@ Percentage with multiple categories: 23.3%</code></pre>
 <section id="briefly-give-answers-to-the-discussion-questions-in-this-section-7" class="level4">
 <h4>Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Business Question Analysis</strong> - What business question does this comprehensive analysis answer? - How does grouping by <code>['shipID', 'prodCategory']</code> differ from grouping by just <code>'prodCategory'</code>? - What insights can ZappTech’s management gain from knowing the percentage of multi-category shipments?</p>
-<p>This comprehensive analysis answers the business question of how many shipments are late for each product category for each shipment as each shipment can have multiple product categories. Here we can see shipments with multiple product categories and its average days late. They can see which product categories are causing the most late shipments and which shipments are causing the most late shipments. They can also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.</p>
+<p>This comprehensive analysis answers the business question of how many shipments are late for each product category for each shipment as each shipment can have multiple product categories. Here we can see shipments with multiple product categories and its average days late. Business can see which product categories are causing the most late shipments and which shipments are causing the most late shipments. Also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.</p>
 <p>Reasons like: 1) What products are causing the most late shipments? 2) Is this product category from a particular supplier? 3) Is late shipments from a particular supplier? 4) Is late shipments due to specific zip code? or location? 5) Is late shipments due to specific warehouse location?</p>
-<div id="0894320f" class="cell" data-execution_count="28">
-<div class="sourceCode" id="cb55"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Comprehensive analysis:&quot;</span>)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comprehensive_analysis.head(<span class="dv">10</span>))</span></code></pre></div>
+<div id="business-question-analysis-1" class="cell" data-message="false" data-execution_count="28">
+<div class="sourceCode" id="cb57"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Comprehensive analysis:&quot;</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comprehensive_analysis.head(<span class="dv">10</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Comprehensive analysis:
    shipID prodCategory  is_late  days_late  has_multiple_categories
@@ -1098,10 +1098,10 @@ Percentage with multiple categories: 23.3%</code></pre>
 9   10010     Machines    False         -6                    False</code></pre>
 </div>
 </div>
-<div id="1b325ac6" class="cell" data-execution_count="29">
-<div class="sourceCode" id="cb57"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments with multiple product categories: &quot;</span>, multi_category_shipments.shape[<span class="dv">0</span>])</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total unique shipments: &quot;</span>, comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>].nunique())</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Percentage of multi-category shipments: &quot;</span>, multi_category_shipments[<span class="st">&#39;shipID&#39;</span>].nunique() <span class="op">/</span> comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>].nunique() <span class="op">*</span> <span class="dv">100</span>)</span></code></pre></div>
+<div id="business-question-analysis-2" class="cell" data-message="false" data-execution_count="29">
+<div class="sourceCode" id="cb59"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Shipments with multiple product categories: &quot;</span>, multi_category_shipments.shape[<span class="dv">0</span>])</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total unique shipments: &quot;</span>, comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>].nunique())</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Percentage of multi-category shipments: &quot;</span>, multi_category_shipments[<span class="st">&#39;shipID&#39;</span>].nunique() <span class="op">/</span> comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>].nunique() <span class="op">*</span> <span class="dv">100</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shipments with multiple product categories:  594
 Total unique shipments:  997
@@ -1113,10 +1113,13 @@ Percentage of multi-category shipments:  23.269809428284855</code></pre>
 </ul>
 <p>Grouping by <code>['shipID', 'prodCategory']</code> provides more insight into the performance of their shipments and their product categories. Identify the root cause of late shipments and to specific late by product category for shipment wise.</p>
 <p>Whereas grouping by just <code>'prodCategory'</code> provides delays at product category level where it provides less insight to identify like its supplier or shipment address or delivery warehouse location. l</p>
-<p>What insights can ZappTech’s management gain from knowing the percentage of multi-category shipments?</p>
+<ul>
+<li>What insights can ZappTech’s management gain from knowing the percentage of multi-category shipments?</li>
+</ul>
 <p>ZappTech’s management can gain insights into the performance of their shipments and their product categories. They can see which product categories are causing the most late shipments and which shipments are causing the most late shipments.</p>
-<div id="ca6fee65" class="cell" data-execution_count="30">
-<div class="sourceCode" id="cb59"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Percentage of multi-category shipments: &quot;</span>, multi_category_shipments[<span class="st">&#39;shipID&#39;</span>].nunique() <span class="op">/</span> comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>].nunique() <span class="op">*</span> <span class="dv">100</span>)</span></code></pre></div>
+<p>They can also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.</p>
+<div id="business-question-analysis-3" class="cell" data-message="false" data-execution_count="30">
+<div class="sourceCode" id="cb61"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Percentage of multi-category shipments: &quot;</span>, multi_category_shipments[<span class="st">&#39;shipID&#39;</span>].nunique() <span class="op">/</span> comprehensive_analysis[<span class="st">&#39;shipID&#39;</span>].nunique() <span class="op">*</span> <span class="dv">100</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Percentage of multi-category shipments:  23.269809428284855</code></pre>
 </div>

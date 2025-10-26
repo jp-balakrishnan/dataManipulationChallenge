@@ -203,6 +203,11 @@ print(shipments_with_lateness[['shipID', 'plannedShipDate', 'actualShipDate', 'i
 
 **Question 3: Debug This Code**
 ```{python}
+#| label: Debug This Code
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 # This code has an error - can you spot it?
 try:
     shipments_with_lateness = (
@@ -233,13 +238,18 @@ actualShipDate is a datetime object
 
 Function to use: "dtype" to find the data type of the actualShipDate column
 
-shipments_with_lateness.dtype gives data type of all columns in the entire dataframe; 
+    * `shipments_with_lateness.dtype` gives data type of all columns in the entire dataframe; 
 
 To get the data type of a specific column, use the column name as a key in the dataframe.
 
-shipments_with_lateness['actualShipDate'].dtype gives data type of actualShipDate column
+    * `shipments_with_lateness['actualShipDate'].dtype` gives data type of actualShipDate column
 
 ```{python}
+#| label: DType Example
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("The dtype of the actualShipDate is {} and plannedShipDate is {}".format(shipments_with_lateness['actualShipDate'].dtype, shipments_with_lateness['plannedShipDate'].dtype))
 ```
 
@@ -255,6 +265,11 @@ Both `actualShipDate` and `plannedShipDate` are datetime objects, so we can safe
 - Use datetime methods (`.dt.days`, `.dt.month`, etc.)
 
 ```{python}
+#| label: Compare Dates
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Compare actualShipDate and plannedShipDate: ", shipments_with_lateness['actualShipDate'][0] > shipments_with_lateness['plannedShipDate'][0])
 print("Calculate time difference: ", shipments_with_lateness['actualShipDate'][0] - shipments_with_lateness['plannedShipDate'][0])
 print("Get day: ", shipments_with_lateness['actualShipDate'][0].day)
@@ -271,6 +286,7 @@ Datetime is chronologically compared, so "2025-04-11" > "2024-05-20" is True bec
 
 1. When we compare String"04-11-2025" and DateTime "05-20-2024", TypeError is thrown because Python cannot directly compare datetime objects with strings
 ```{python}
+#| label: Compare Date String and DateTime 1
 #| echo: true
 date_obj = datetime(2024, 5, 20)
 date_str = "2024-05-20"
@@ -285,6 +301,11 @@ except TypeError as e:
 2. When we compare String "04-11-2025" and String "05-20-2024" of same format, python compares them lexicographically (alphabetically), not chronologically:
 
 ```{python}
+#| label: Compare Date String and DateTime 2
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 # String comparison (lexicographic)
 print("Compare String '04-11-2025 > 05-20-2024': ", "04-11-2025" > "05-20-2024")  # False 
 
@@ -303,6 +324,11 @@ print("Compare Datetime '04-11-2025 > 05-20-2024': ", date1 > date2)  # True (co
 
 Best Practice: Always convert strings to datetime objects before comparison:
 ```{python}
+#| label: Compare Date String and DateTime 3
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 date_str1 = "2024-05-20"
 date_str2 = "2024-04-11"
 dt1 = datetime.strptime(date_str1, "%Y-%m-%d")
@@ -322,6 +348,9 @@ Problem is accessing `shipments_df['is_late']` before the `is_late` column is cr
 Fix the code by using a lambda function to reference internally created column `is_late` using reference the current dataframe `df`.
 
 ```{python}
+#| echo: true
+#| message: false
+#| warning: false
 shipments_with_lateness = (
     shipments_df
     .assign(
@@ -396,7 +425,11 @@ print(late_shipments.head())
 Define a variable `late_threshold` and then use it in query using string inplace replacement of the variable.
 
 ```{python}
-
+#| label: Additional Row Querying
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 late_threshold = 5
 print("Define late_thresold variable; Late threshold: ", late_threshold)
 print("Total Number of shipments: ", len(shipments_with_lateness))
@@ -450,6 +483,11 @@ print("Remaining columns:", clean_shipments.columns.tolist())
 .filter() is filtering the dataframe to keep only the columns in the list. This is more explicit and easier to understand. It's easier to debug and maintain. We can also use .drop(columns=['quantity']) to drop multiple columns at once.
 
 ```{python}
+#| label: Drop vs Filter Strategies
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Columns in the dataframe: ", clean_shipments.columns.tolist())
 print("Columns in the dataframe after dropping quantity column: ", clean_shipments.drop(columns=['shipID']).columns.tolist())
 print("Columns in the dataframe after filtering to keep only the columns in the list: ", clean_shipments.filter(['partID', 'plannedShipDate', 'actualShipDate', 'days_late']).columns.tolist())
@@ -469,6 +507,11 @@ If you use `.dropna(subset=['plannedShipDate', 'actualShipDate'])`, it will drop
 Data analysis is about focusing on the relevant columns and data. If you don't need to check for missing values in all columns, it's more efficient and easier to understand. Say each column is a feature and based on domain/context, you may not need to check for missing values in all columns. example if you are analyzing a dataset of customer orders, you may not need to check for missing values in the order created-by user column if you are only interested in the order amount.
 
 ```{python}
+#| label: Handling Missing Data
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Columns in the dataframe: ", clean_shipments.columns.tolist())
 print("Columns in the dataframe after dropping missing values: ", clean_shipments.dropna().columns.tolist())
 print("Columns in the dataframe after dropping missing values in subset: ", clean_shipments.dropna(subset=['plannedShipDate', 'actualShipDate']).columns.tolist())
@@ -518,6 +561,11 @@ print(sorted_by_lateness[['shipID', 'partID', 'days_late', 'is_late']].head(10))
 `ascending=False` sorts in descending order. `ascending=True` sorts in ascending order.
 
 ```{python}
+#| label: Sorting Strategies 1
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Shipments sorted by lateness (worst first):")
 print(sorted_by_lateness[['shipID', 'partID', 'days_late', 'is_late']].sort_values('days_late', ascending=False).head(10))
 print("Shipments sorted by lateness (best first):")
@@ -529,6 +577,11 @@ print(sorted_by_lateness[['shipID', 'partID', 'days_late', 'is_late']].sort_valu
 Sort by `is_late` in descending order, then by `days_late` in ascending order. This is to ensure that the shipments that are late are sorted first, and then the shipments that are on time are sorted by the number of days late.
 
 ```{python}
+#| label: Sorting Strategies 2
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Shipments sorted by is_late (worst first) and then by days_late (best first):")
 print(sorted_by_lateness[['shipID', 'partID', 'days_late', 'is_late']].sort_values(['is_late', 'days_late'], ascending=[False, True]).head(10))
 ``` 
@@ -542,6 +595,9 @@ print(sorted_by_lateness[['shipID', 'partID', 'days_late', 'is_late']].sort_valu
 The original index is the index of the dataframe before sorting. It is the index of the dataframe after sorting.
 
 ```{python}
+#| echo: true
+#| message: false
+#| warning: false
 print("Original index: ", sorted_by_lateness.index)
 print("Index after sorting: ", sorted_by_lateness.reset_index(drop=True).index)
 ```
@@ -589,10 +645,20 @@ print(f"\nOn-time delivery rate: {on_time_rate:.1f}%")
 Boolean values are either True or False. Here, true is 1 and false is 0. 
 Sum is a function that adds up the values of a column, here it is adding up the number of True and False values. Basically it adds up all true = 1 and false = 0. So, out of 4000 records, 456 records are late (is_late is TRUE).
 ```{python}
+#| label: Boolean Aggregation 1
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Number of late shipments: ", service_metrics['is_late']['sum'])
 ```
 On other hand, count is a function that counts the number of values in a column. It counts the number of True and False values. SO it counts all records and it means overall number of records.
 ```{python}
+#| label: Boolean Aggregation 2
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Number of shipments: ", service_metrics['is_late']['count'])
 ```
 
@@ -644,6 +710,11 @@ So, left join is more flexible and avoids data loss.
 We can check if any shipments were lost during the merge by checking if the number of records in the left dataframe is the same as the number of records in the right dataframe after the merge.
 
 ```{python}
+#| label: Join Types and Data Loss
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Number of records in the left dataframe: ", len(clean_shipments))
 print("Number of records in the right dataframe: ", len(product_line_df))
 print("Number of records in the left dataframe after the merge: ", len(shipments_with_category))
@@ -653,7 +724,11 @@ print("Number of records in the left dataframe after the merge: ", len(shipments
 - What happens if there are duplicate `partID` values in the `product_line_df`?
 
 ```{python}
-
+#| label: Key Column Matching
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 # add entry in shipments_with_category dataframe with partID 1234567890 and prodCategory Marketables using concat
 new_shipmentrow = pd.DataFrame({'partID': '1234567890', 'actualShipDate': '2013-10-04', 'plannedShipDate': '2013-10-04', 'is_late': False, 'days_late': 0, 'shipID': '100001'}, index=[0])
 
@@ -733,6 +808,11 @@ print(service_by_category)
 If you don't use `.agg()`, you will get the raw data without any aggregation.
 
 ```{python}
+#| label: GroupBy Mechanics
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Grouped data without aggregation:")
 print(shipments_with_category.groupby('prodCategory').head(1))
 print("Grouped data with aggregation:")
@@ -794,7 +874,7 @@ print(f"Percentage with multiple categories: {multi_category_shipments['shipID']
 - What insights can ZappTech's management gain from knowing the percentage of multi-category shipments?
 
 This comprehensive analysis answers the business question of how many shipments are late for each product category for each shipment as each shipment can have multiple product categories. 
-Here we can see shipments with multiple product categories and its average days late. They can see which product categories are causing the most late shipments and which shipments are causing the most late shipments. They can also see the percentage of shipments that have multiple product categories. 
+Here we can see shipments with multiple product categories and its average days late. Business can see which product categories are causing the most late shipments and which shipments are causing the most late shipments. Also see the percentage of shipments that have multiple product categories. 
 This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.
 
 Reasons like:
@@ -805,11 +885,21 @@ Reasons like:
     5) Is late shipments due to specific warehouse location?
 
 ```{python}
+#| label: Business Question Analysis 1
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Comprehensive analysis:")
 print(comprehensive_analysis.head(10))
 ```
 
 ```{python}
+#| label: Business Question Analysis 2
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Shipments with multiple product categories: ", multi_category_shipments.shape[0])
 print("Total unique shipments: ", comprehensive_analysis['shipID'].nunique())
 print("Percentage of multi-category shipments: ", multi_category_shipments['shipID'].nunique() / comprehensive_analysis['shipID'].nunique() * 100)
@@ -821,11 +911,17 @@ Grouping by `['shipID', 'prodCategory']` provides more insight into the performa
 
 Whereas grouping by just `'prodCategory'` provides delays at product category level where it provides less insight to identify like its supplier or shipment address or delivery warehouse location. l
 
-What insights can ZappTech's management gain from knowing the percentage of multi-category shipments?
+- What insights can ZappTech's management gain from knowing the percentage of multi-category shipments?
 
 ZappTech's management can gain insights into the performance of their shipments and their product categories. They can see which product categories are causing the most late shipments and which shipments are causing the most late shipments.
 
+They can also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.
 ```{python}
+#| label: Business Question Analysis 3
+#| echo: true
+#| message: false
+#| warning: false
+#| 
 print("Percentage of multi-category shipments: ", multi_category_shipments['shipID'].nunique() / comprehensive_analysis['shipID'].nunique() * 100)
 ```
 

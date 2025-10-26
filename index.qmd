@@ -879,12 +879,12 @@ This comprehensive analysis answers the business question of how many shipments 
 Here we can see shipments with multiple product categories and its average days late. Business can see which product categories are causing the most late shipments and which shipments are causing the most late shipments. Also see the percentage of shipments that have multiple product categories. 
 This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.
 
-Reasons like:
-    1) What products are causing the most late shipments?
-    2) Is this product category from a particular supplier?
-    3) Is late shipments from a particular supplier?
-    4) Is late shipments due to specific zip code? or location?
-    5) Is late shipments due to specific warehouse location?
+**Business Reasons like:**
+- What products are causing the most late shipments?
+- Is this product category from a particular supplier?
+- Is late shipments from a particular supplier?
+- Is late shipments due to specific zip code? or location?
+- Is late shipments due to specific warehouse location?
 
 ```{python}
 #| label: Business Question Analysis 1

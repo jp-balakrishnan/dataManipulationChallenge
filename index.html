@@ -482,7 +482,7 @@ Are dt1 and dt2 same data type?  True</code></pre>
 <p>What’s wrong with the <code>lateStatement</code> assignment and how would you fix it?</p>
 <p>Problem is accessing <code>shipments_df['is_late']</code> before the <code>is_late</code> column is created. Until assign method is complete, <code>is_late</code> is not yet created.</p>
 <p>Fix the code by using a lambda function to reference internally created column <code>is_late</code> using reference the current dataframe <code>df</code>.</p>
-<div id="8857d811" class="cell" data-message="false" data-execution_count="9">
+<div id="6f271a10" class="cell" data-message="false" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>shipments_with_lateness <span class="op">=</span> (</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    shipments_df</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
@@ -777,7 +777,7 @@ Shipments sorted by lateness (best first):
 <p><strong>Question 2: Index Management</strong> - Why do we use <code>.reset_index(drop=True)</code> after sorting? - What happens to the original index when you sort? Why might this be problematic?</p>
 <p><code>.reset_index(drop=True)</code> after sorting is to reset the index to be sequential. This is to ensure that the index is not mixed up with the data.</p>
 <p>The original index is the index of the dataframe before sorting. It is the index of the dataframe after sorting.</p>
-<div id="825ae434" class="cell" data-message="false" data-execution_count="18">
+<div id="6b7748db" class="cell" data-message="false" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original index: "</span>, sorted_by_lateness.index)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Index after sorting: "</span>, sorted_by_lateness.reset_index(drop<span class="op">=</span><span class="va">True</span>).index)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1087,7 +1087,14 @@ Percentage with multiple categories: 23.3%</code></pre>
 <h4 class="anchored" data-anchor-id="briefly-give-answers-to-the-discussion-questions-in-this-section-7">Briefly Give Answers to the Discussion Questions In This Section</h4>
 <p><strong>Question 1: Business Question Analysis</strong> - What business question does this comprehensive analysis answer? - How does grouping by <code>['shipID', 'prodCategory']</code> differ from grouping by just <code>'prodCategory'</code>? - What insights can ZappTech’s management gain from knowing the percentage of multi-category shipments?</p>
 <p>This comprehensive analysis answers the business question of how many shipments are late for each product category for each shipment as each shipment can have multiple product categories. Here we can see shipments with multiple product categories and its average days late. Business can see which product categories are causing the most late shipments and which shipments are causing the most late shipments. Also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.</p>
-<p><strong>Business Reasons like:</strong> - What products are causing the most late shipments? - Is this product category from a particular supplier? - Is late shipments from a particular supplier? - Is late shipments due to specific zip code? or location? - Is late shipments due to specific warehouse location?</p>
+<p><strong>Business Reasons like:</strong></p>
+<ol type="1">
+<li>What products are causing the most late shipments?</li>
+<li>Is this product category from a particular supplier?</li>
+<li>Is late shipments from a particular supplier?</li>
+<li>Is late shipments due to specific zip code? or location?</li>
+<li>Is late shipments due to specific warehouse location?</li>
+</ol>
 <div id="business-question-analysis-1" class="cell" data-message="false" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Comprehensive analysis:"</span>)</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comprehensive_analysis.head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1120,14 +1127,15 @@ Percentage of multi-category shipments:  23.269809428284855</code></pre>
 <li>How does grouping by <code>['shipID', 'prodCategory']</code> differ from grouping by just <code>'prodCategory'</code>?</li>
 </ul>
 <p>Grouping by <code>['shipID', 'prodCategory']</code> provides more insight into the performance of their shipments and their product categories. Identify the root cause of late shipments and to specific late by product category for shipment wise.</p>
-<p>Whereas grouping by just <code>'prodCategory'</code> provides delays at product category level where it provides less insight to identify like its supplier or shipment address or delivery warehouse location. l</p>
+<p>Whereas grouping by just <code>'prodCategory'</code> provides delays at product category level where it provides less insight to identify like its supplier or shipment address or delivery warehouse location.</p>
 <ul>
 <li>What insights can ZappTech’s management gain from knowing the percentage of multi-category shipments?</li>
 </ul>
 <p>ZappTech’s management can gain insights into the performance of their shipments and their product categories. They can see which product categories are causing the most late shipments and which shipments are causing the most late shipments.</p>
-<p>They can also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.</p>
+<p>They can also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which helps an inventory management to improve the performance of their shipments.</p>
 <div id="business-question-analysis-3" class="cell" data-message="false" data-execution_count="30">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Percentage of multi-category shipments: "</span>, multi_category_shipments[<span class="st">'shipID'</span>].nunique() <span class="op">/</span> comprehensive_analysis[<span class="st">'shipID'</span>].nunique() <span class="op">*</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Percentage of multi-category shipments: "</span>, multi_category_shipments[<span class="st">'shipID'</span>].nunique() <span class="op">/</span> comprehensive_analysis[<span class="st">'shipID'</span>].nunique() <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot to show late shipments by product category and by various other cloumns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Percentage of multi-category shipments:  23.269809428284855</code></pre>
 </div>

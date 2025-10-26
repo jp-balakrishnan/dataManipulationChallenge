@@ -880,11 +880,12 @@ Here we can see shipments with multiple product categories and its average days 
 This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.
 
 **Business Reasons like:**
-- What products are causing the most late shipments?
-- Is this product category from a particular supplier?
-- Is late shipments from a particular supplier?
-- Is late shipments due to specific zip code? or location?
-- Is late shipments due to specific warehouse location?
+
+1. What products are causing the most late shipments?
+2. Is this product category from a particular supplier?
+3. Is late shipments from a particular supplier?
+4. Is late shipments due to specific zip code? or location?
+5. Is late shipments due to specific warehouse location?
 
 ```{python}
 #| label: Business Question Analysis 1
@@ -911,13 +912,14 @@ print("Percentage of multi-category shipments: ", multi_category_shipments['ship
 
 Grouping by `['shipID', 'prodCategory']` provides more insight into the performance of their shipments and their product categories. Identify the root cause of late shipments and to specific late by product category for shipment wise.
 
-Whereas grouping by just `'prodCategory'` provides delays at product category level where it provides less insight to identify like its supplier or shipment address or delivery warehouse location. l
+Whereas grouping by just `'prodCategory'` provides delays at product category level where it provides less insight to identify like its supplier or shipment address or delivery warehouse location. 
 
 - What insights can ZappTech's management gain from knowing the percentage of multi-category shipments?
 
 ZappTech's management can gain insights into the performance of their shipments and their product categories. They can see which product categories are causing the most late shipments and which shipments are causing the most late shipments.
 
-They can also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which can help in inventory management and to improve the performance of their shipments.
+They can also see the percentage of shipments that have multiple product categories. This helps business to identify the root cause of late shipments and to improve the performance of their shipments. Also create plans to multiple shipments based on the product categories which helps an inventory management to improve the performance of their shipments.
+
 ```{python}
 #| label: Business Question Analysis 3
 #| echo: true
